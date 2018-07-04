@@ -1,0 +1,23 @@
+{
+  "name": "transbot",
+  "version": "1.0.0",
+  "description": "스팀잇 용 번역 봇",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wonsama/transbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wonsama/transbot/issues"
+  },
+  "homepage": "https://github.com/wonsama/transbot#readme",
+  "dependencies": {
+    "google-translate-api": "^2.3.0",
+    "steem": "^0.7.1"
+  }
+}
