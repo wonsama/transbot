@@ -86,17 +86,8 @@ monitorBuffer();
 * @param cmd 번역할 대상 언어
 */
 function monitoring(data, cmd){
-
-	// let parent_author = data.parent_author;
-	// let parent_permlink = data.parent_permlink;
-	// let author = data.author;
-	// let permlink = data.permlink;
-	// let body = data.body;
-
-	// if(buffers<1){
 		data.cmd = cmd;
 		buffers.push(data);	
-	// }
 }
 
 // start monitoring
