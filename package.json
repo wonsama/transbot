@@ -18,6 +18,7 @@
   "homepage": "https://github.com/wonsama/transbot#readme",
   "dependencies": {
     "google-translate-api": "^2.3.0",
-    "steem": "^0.7.1"
+    "steem": "^0.7.1",
+    "striptags": "^3.1.1"
   }
 }

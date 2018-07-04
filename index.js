@@ -7,6 +7,7 @@ const {to} = require ('./util/wutil');	// async 처리
 // 3rd party module
 const steem = require('steem');
 const translate = require('google-translate-api');
+const striptags = require('striptags');
 
 // 기본값
 const STEEM_TRANS_AUTHOR = process.env.STEEM_TRANS_AUTHOR;
@@ -46,6 +47,7 @@ async function monitorBuffer(sec=5){
 			// 댓글 작성하기
 			let reply;
 			let body = `본문(${_getLang(trans.from.language.iso)}) 이(가) ${_getLang(item.cmd)} 로 아래와 같이 번역되었습니다. created by @wonsama\n\n${trans.text}`
+			body = striptags(body, [], '\n');
 			let wif = STEEM_TRANS_KEY_POSTING;
 			let author = STEEM_TRANS_AUTHOR;
 			let permlink = `${author}-trans-${new Date().getTime()}`;
