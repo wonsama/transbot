@@ -64,3 +64,5 @@ typings/
 test*
 
 .DS_Store
+run.sh
+*.backup
