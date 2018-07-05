@@ -35,7 +35,15 @@ async function monitorBuffer(){
 
 		// 부모글 정보를 조회
 		let par;
-		[err, par] = await to(steem.api.getContentAsync(item.parent_author, item.parent_permlink));
+
+		if(item.parent_author!=STEEM_TRANS_AUTHOR){
+			[err, par] = await to(steem.api.getContentAsync(item.parent_author, item.parent_permlink));	
+		}else{
+			// 버퍼 제거
+			buffers.shift();
+			err = `author [ ${STEEM_TRANS_AUTHOR} ] is not allowed`;
+		}
+
 		if(!err){
 
 			// 부모글의 body를 번역 수행
@@ -49,6 +57,7 @@ async function monitorBuffer(){
 			let reply;
 			let body = `본문(${_getLang(trans.from.language.iso)}) 이(가) ${_getLang(item.cmd)} (으)로 아래와 같이 번역되었습니다.\n\n---\n${trans.text}\n\n---\ncreated by @wonsama\n`
 			body = striptags(body, [], '\n');
+			body = text.replace(/@번역해/gi,'@ 번역해');	// @번역해 => @ 번역해 , 번역 무한루핑 방지용
 			let wif = STEEM_TRANS_KEY_POSTING;
 			let author = STEEM_TRANS_AUTHOR;
 			let permlink = `${item.author}-trans-${new Date().getTime()}`;
@@ -99,7 +108,7 @@ monitorBuffer();
 * @param cmd 번역할 대상 언어
 */
 function monitoring(data, cmd){
-		data.cmd = cmd;
+		data.cmd = cmd.toLowerCase(); // 모든 코드는 소문자로 입력해야 됨
 		buffers.push(data);
 
 		console.log(new Date(), 'monitoring', data);
