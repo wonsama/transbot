@@ -1,140 +1,118 @@
-// my utils
-const {clear} = require ('./util/wconsole');	// 화면 클리어 
+const {monitor} = require ('./util/wmonitor');		// 스팀잇 댓글 모니터링
+const {to} = require ('./util/wutil');						// async 처리
 const {getLang} = require ('./util/wlangs');	// 구글번역 지원 언어 확인
 const {_getLang} = require ('./util/wlangs');	// 구글번역 지원 언어 확인
-const {to} = require ('./util/wutil');	// async 처리
 
-// 3rd party module
 const steem = require('steem');
 const translate = require('google-translate-api');
 const striptags = require('striptags');
 
-// 기본값
 const STEEM_TRANS_AUTHOR = process.env.STEEM_TRANS_AUTHOR;
 const STEEM_TRANS_KEY_POSTING = process.env.STEEM_TRANS_KEY_POSTING;
 
 const CUT_BODY_LENGTH = 5000; // 구글번역은 최대 5000자 까지 가능, 물론 split하면 되지만 5000 글자 자체가 많음.
-const TIME_SEC = 1000;				// 초
-const MONITOR_RELOAD_SEC = 10;	// 버퍼 모니터링 주기
-
-// clear screen
-clear();
+const MONITOR_COMMAND = '#wtrans';
+const MONITOR_COMMAND_REPLACE = '# wtrans';
+const SHOW_DEBUG = true;
 
 /*
-* 버퍼에 담긴 내용을 모니터링 한다
+[ [ 'comment',
+    { parent_author: 'wonsama',
+      parent_permlink: 'voteview-wonsama-1530288386275',
+      author: 'wonsama',
+      permlink:
+       're-wonsama-voteview-wonsama-1530288386275-20180706t091541980z',
+      title: '',
+      body: '와우 !\n\n#wtrans\n\n번역이 되냐 ?',
+      json_metadata: '{"tags":["voteview","wtrans"],"app":"steemit/0.1"}' } ] ]
 */
-let buffers = [];
-async function monitorBuffer(){
-	
+
+/*
+* 댓글 분석 수행
+* @param item 댓글정보
+*/
+async function analisys(item){
+
 	let err;
 
-	if(buffers.length>0){
+	if(SHOW_DEBUG){
+		// 댓글 링크 정보 출력
+		console.log(`parent link : https://steemit.com/@${item.parent_author}/${item.parent_permlink}`);
+		console.log(`reply link : https://steemit.com/@${item.author}/${item.permlink}`);
+	}
 
-		// 첫번째로 담긴 내용을 읽어들임
-		let item = buffers[0];
+	// STEP 1 : 부모글 정보 조회 
+	[err, par] = await to(steem.api.getContentAsync(item.parent_author, item.parent_permlink));	
+	if(!err){
 
-		// 부모글 정보를 조회
-		let par;
-
-		if(item.parent_author!=STEEM_TRANS_AUTHOR){
-			[err, par] = await to(steem.api.getContentAsync(item.parent_author, item.parent_permlink));	
-		}else{
-			// 버퍼 제거
-			buffers.shift();
-			err = `author [ ${STEEM_TRANS_AUTHOR} ] is not allowed`;
-		}
-
+		// STEP 2 : 부모글의 body를 번역 수행
+		let contents = par.body.substr(0, CUT_BODY_LENGTH);
+		contents = contents.replace(/\!\[(.*?)\]\((.*?)\)/gi,'$2');	// 이미지 앞에 태그 제거
+		let lang = getLang(item.body, MONITOR_COMMAND).toLowerCase();
+		let trans;
+		[err, trans] = await to(translate(contents, {to:lang}));
+		
 		if(!err){
-
-			// 부모글의 body를 번역 수행
-			// TODO : 5천글자 이상 처리
-			let contents = par.body.substr(0, 5000);
-			let trans;
-			// item.cmd = 'ko';	// must remove
-			[err, trans] = await to(translate(contents, {to:item.cmd}));
-
-			// 댓글 작성하기
+			// STEP 3 : 댓글 작성하기
 			let reply;
-			let body = `본문(${_getLang(trans.from.language.iso)}) 이(가) ${_getLang(item.cmd)} (으)로 아래와 같이 번역되었습니다.\n\n---\n${trans.text}\n\n---\ncreated by @wonsama\n`
-			body = striptags(body, [], '\n');
-			body = text.replace(/@번역해/gi,'@ 번역해');	// @번역해 => @ 번역해 , 번역 무한루핑 방지용
+			let body = `${_getLang(trans.from.language.iso)} has been translated into ${_getLang(lang)}.\n\n---\n${trans.text}\n\n---\ncreated by @wonsama /  Upvote this translation if it helps :)\n`
+			body = striptags(body, [], '\n');	// 모든 태그 제거
+
 			let wif = STEEM_TRANS_KEY_POSTING;
 			let author = STEEM_TRANS_AUTHOR;
 			let permlink = `${item.author}-trans-${new Date().getTime()}`;
 			let title = '';
 			let jsonMetadata = {
-				tags:['wonsama','transbot'],
-				app: 'transbot/v1.0.0',
+				tags:['wonsama','wtrans'],
+				app: 'wtrans/v1.0.0',
 				format: 'markdown'
 			};
 			[err, reply] = await to(steem.broadcast.commentAsync(wif, item.author, item.permlink, author, permlink, title, body, jsonMetadata));
+
 			if(!err){
-
-				// 버퍼 제거
-				buffers.shift();
-
-				// 번역된 정보 출력 - 확인용
-				console.log(new Date(), `translate : https://steemit.com/@${author}/${permlink} , current buffer size : ${buffers.length}`);
-				console.log(`--------------------------------------------------`);
-
-				// 다시 N초 이후 버퍼를 재 검색한다 - 정상처리 된 경우임
-				setTimeout(monitorBuffer, MONITOR_RELOAD_SEC * TIME_SEC);	
+				if(SHOW_DEBUG){
+					console.log(`translation link : https://steemit.com/@${author}/${permlink}`);
+				}
+				return Promise.resolve(reply);
 			}
 		}
-		
-	}else{
-
-		console.log(new Date(), 'buffer is empty');
-
-		// 다시 N초 이후 버퍼를 재 검색한다 - 버퍼에 담긴 내용이 없는 경우 
-		setTimeout(monitorBuffer, MONITOR_RELOAD_SEC * TIME_SEC);	
 	}
 
-	// 오류가 발생한 경우
 	if(err){
-		// TODO : 각단계(부모글조회, 댓글 작성)에서 오류가 나는 경우 파일로 기록
-		console.log(new Date(), err);
-
-		// 다시 N초 이후 버퍼를 재 검색한다 - 오류가 담긴 경우 ( 버퍼는 아직 제거 안됨 )
-		setTimeout(monitorBuffer, MONITOR_RELOAD_SEC * TIME_SEC);
+		// TODO : 오류가 발생하면 마지막 읽어들인 블록 정보를 이전으로 돌려서 작업 수행하는 것을 고려
+		console.error(`analisys : ${new Date().toISOString()} - `, err);
+		return Promise.reject(err);
 	}
-
+	// TODO : 오류 발생건은 파일에 기록하여 수동으로 작업을 처리할 수 있는 메소드를 별도 생성
 }
-monitorBuffer();
 
 /*
-* 스트림 데이터에서 @번역해 가 포함된 댓글 정보를 모니터링
-* @param data 댓글정보
-* @param cmd 번역할 대상 언어
+* 진입점 - 댓글 목록 정보를 모니터링 수행한다
 */
-function monitoring(data, cmd){
-		data.cmd = cmd.toLowerCase(); // 모든 코드는 소문자로 입력해야 됨
-		buffers.push(data);
+function init(){
 
-		console.log(new Date(), 'monitoring', data);
-		console.log(`current buffer size : ${buffers.length}`);
-		console.log('goto cmd link', `https://steemit.com/@${data.author}/${data.permlink}`);
-}
+	// 모니터링 시작
+	monitor()
 
-// start monitoring
-// steem.api.streamOperations : doesn't exist async function
-steem.api.streamOperations(function (err, results) {
+	// 댓글 정보를 얻어와 이후 작업 수행
+	.then(async replies=>{
 
-	if(results){
-
-		let command = results[0];
-		let data = results[1];	
-		
-		// 댓글만 추출, 댓글봇이 쓴 글에는 댓글을 달지 않음.
-		if(command=='comment' && data && data.parent_author && data.parent_author!='' && data.parent_author!=STEEM_TRANS_AUTHOR){
-			
-			// @번역해 태그가 포함된 댓글정보만 가져온다
-			let cmd = getLang(data.body);
-			if(cmd){
-				monitoring(data, cmd);	
-			}
-
+		// 커맨드를 포함한 것을 필터링 + 부모글 작성자가 wdev가 아니어야 됨
+		// console.log(replies[0][1].body.indexOf(MONITOR_COMMAND), STEEM_TRANS_AUTHOR)
+		try{
+			replies = replies.filter(data=>data[1].body.indexOf(MONITOR_COMMAND)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
+			for(let rep of replies){
+				// 분석 수행
+				await analisys(rep[1]);	// 딱히 여기도 애러처리는 안해도 될듯 윗 부분에서 처리
+			}	
+		}catch(e){
+			console.error(`monitor fail : `, e);
 		}
-	}
+		
+		// 다시 모니터링을 수행한다
+		init();
 
-});
+	})
+	.catch(init);	// 오류나도 다시 모니터링 수행 
+}
+init();

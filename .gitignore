@@ -66,3 +66,6 @@ test*
 .DS_Store
 run.sh
 *.backup
+
+last_block.txt
+last_launched.txt

@@ -5,6 +5,22 @@ const readline = require('readline');
 */
 let fn = {};
 
+fn.sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/*
+* 입력값을 숫자로 변환한다, 부적합 경우 null 반환
+* @param source 입력값
+* @return 변환된 숫자(부적합 시 null 반환)
+*/
+fn.getNumber = (source) =>{  
+  if(!source || isNaN(source)){
+    return null;
+  }
+  return Number(source);
+}
+
 /*
 * top 정보를 추출한다
 * @param source 개체 정보
