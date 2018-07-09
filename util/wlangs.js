@@ -113,16 +113,17 @@ fn._getLang = (key) => {
 }
 
 /*
-* source 에서 commands 를 포함하는 경우 파싱하여 언어 타입 정보를 가져온다
-* @return 언어타입
+* 명령어(내용) 내용을 반환한다, 처음 명령을 변환처리 한다, 찾지 못하면 null
+* @param source 문자열
+* @param commands 명령어  
+* @return 찾은(내용) 
 */
-fn.getLang = (source, commands='@번역해', defaults='ko') => {
-
+fn.getCommand = (source, commands) => {
 	const FIND_STR = commands;
 	const FIND_CMD_STR = `${FIND_STR}(`;
 	const FIND_CMD_END = `)`;
 
-	if(!source){
+	if(!source || !commands){
 		return null;
 	}
 
@@ -133,19 +134,37 @@ fn.getLang = (source, commands='@번역해', defaults='ko') => {
 		let len = idxEnd - idxStart - FIND_CMD_STR.length;
 		let cmd = source.substr(idxStart+FIND_CMD_STR.length, len);
 
-		// 지원하는 언어 확인
+		return cmd;
+	}
+
+	return null;
+}
+
+/*
+* source 에서 commands 를 포함하는 경우 파싱하여 언어 타입 정보를 가져온다
+* @return 언어타입
+*/
+fn.getLang = (source, commands, defaults='ko') => {
+
+	const FIND_STR = commands;
+	const FIND_CMD_STR = `${FIND_STR}(`;
+	const FIND_CMD_END = `)`;
+
+	if(!source){
+		return null;
+	}
+
+	let cmd = fn.getCommand(source, commands);
+	if(cmd){
 		if(fn._getLang(cmd)){
 			return cmd;
 		}else{
-			return defaults;
-		}
-
+			return defaults;	
+		}	
 	}else if(source.includes(FIND_STR)){
-
 		// 기본값으로 영어 변환
 		return defaults;
 	}
-
 	// 존재하지 않음
 	return null;
 }

@@ -1,14 +1,15 @@
 const {to} = require ('./wutil');					// async 처리
 const {getNumber} = require ('./wutil');	// 숫자 변환
+const wlog = require('./wlog');							// 로그
 
 const steem = require('steem');
 const fs = require('fs').promises;	// 참고로 promises 는 v10 부터 나왔고, 실험용 이라는 디버깅로그가 찍힘에 유의
 
 const FILE_CHARSET_UTF8 = 'utf-8';
-const ROOT_FOLDER = '/Users/wonsama/Documents/GitHub/transbot';
-const LAST_LAUNCHED_FILE = `${ROOT_FOLDER}/last_launched.txt`;
+const STEEM_TRANS_ROOT = process.env.STEEM_TRANS_ROOT?process.env.STEEM_TRANS_ROOT:'.';
+const LAST_LAUNCHED_FILE = `${STEEM_TRANS_ROOT}/last_launched.txt`;
 const LAST_BLOCK_NUMBER = 0;
-const LAST_BLOCK_FILE = `${ROOT_FOLDER}/last_block.txt`;
+const LAST_BLOCK_FILE = `${STEEM_TRANS_ROOT}/last_block.txt`;
 
 let fn = {}
 
@@ -137,7 +138,7 @@ fn.getTransactions = ( blockArr ) =>{
 				return Number(""+a.block_num+a.transaction_num.toString().padStart(3, "0")) - Number(""+b.block_num+b.transaction_num.toString().padStart(3, "0"));
 			});
 	}catch(e){
-		console.error('getTransactions', e);
+		wlog.error(e, 'getTransactions');
 		return null;
 	}
 
@@ -159,7 +160,7 @@ fn.getOperations = ( transactions ) =>{
 			operations = operations.concat(tran.operations);
 		}
 	}catch(e){
-		console.error('getOperations', e);
+		wlog.error(e, 'getOperations');
 		return null;	
 	}
 

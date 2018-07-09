@@ -3,6 +3,7 @@ const steem = require('steem');
 const {sleep} = require ('./wutil');						// async 처리
 const {to} = require ('./wutil');						// async 처리
 const wblock = require ('./wblock');				// 블록처리 관련 메소드 모음
+const wlog = require('./wlog');							// 로그
 
 const SEC = 1000;
 const TIME_TO_SLEEP = 2*SEC;
@@ -64,21 +65,19 @@ fn.monitor = async () =>{
 						lastnumber = blockEnd;
 
 						// 읽어들인 블록 목록 출력
-						if(SHOW_DEBUG){
-							console.log(`[ ${blockStart} ~ ${blockEnd} ( block : ${blockEnd - blockStart +1}, replies : ${replies.length} ) ] ${new Date().toISOString()}\n--------------------------------------------------`);	
-						}
-
+						wlog.log(`[ ${blockStart} ~ ${blockEnd} ( block : ${blockEnd - blockStart +1}, replies : ${replies.length} ) ]`);	
+						wlog.log(`--------------------------------------------------`);
 					}
 				}
 			}
 		} else{
 			// 블록 목록 조회 - 실패, 파일저장 오류는 현저히 낮음
-			console.error(`${new Date().toISOString()} - getLastBlockNumer fail`, err);	
+			wlog.error(err, 'getLastBlockNumer');	
 			return Promise.reject(err);
 		}
 	}catch(e){
 		// 최근 블럭번호 조회 - 실패
-		console.error(`${new Date().toISOString()} - getBlocks fail : `, e);
+		wlog.error(e, 'getBlocks');
 		return Promise.reject(e);
 	}
 
@@ -86,9 +85,7 @@ fn.monitor = async () =>{
 
 	// 다시 첨부터 시작 !	
 	await to(wblock.saveTime());	// 오류나도 딱히 처리할 필요 없음 마지막 기동시간 저장용
-	if(SHOW_DEBUG){
-		console.log(`[ end ] ${new Date().toISOString()}`);
-	}
+	wlog.log('[ end ]\n');
 
 	// 쉬어가기
 	await sleep(TIME_TO_SLEEP);
