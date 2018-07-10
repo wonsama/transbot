@@ -72,7 +72,7 @@ async function wtransup(item){
 			let reply;
 			let time = new Date().getTime();
 			let header = `${_getLang(trans.from.language.iso)} has been translated into ${_getLang(lang)}.\n\n`;
-			let footer = `created by @wonsama / id [ ${time} ] / [메뉴얼](${TRANSBOT_MANUAL_KO_LINK}) [MANUAL](${TRANSBOT_MANUAL_EN_LINK}) \n`;
+			let footer = `created by @wonsama / id [ ${time} ] / [메뉴얼](${TRANSBOT_MANUAL_KO_LINK}) / [MANUAL](${TRANSBOT_MANUAL_EN_LINK}) \n`;
 			// let body = `${header}---\n${trans.text}\n\n---\n${footer}`;
 			let body = striptags(trans.text, [], '\n');	// 모든 태그 제거
 			body = `${header}---\n${body}\n\n---\n${footer}`;
@@ -135,7 +135,7 @@ async function wtransme(item){
 		let reply;
 		let time = new Date().getTime();
 		let header = `${_getLang(trans.from.language.iso)} has been translated into ${_getLang(lang)}.\n\n`;
-		let footer = `created by @wonsama / id [ ${time} ] / [메뉴얼](${TRANSBOT_MANUAL_KO_LINK}) [MANUAL](${TRANSBOT_MANUAL_EN_LINK}) \n`;
+		let footer = `created by @wonsama / id [ ${time} ] / [메뉴얼](${TRANSBOT_MANUAL_KO_LINK}) / [MANUAL](${TRANSBOT_MANUAL_EN_LINK}) \n`;
 		// let body = `${header}---\n${trans.text}\n\n---\n${footer}`;
 		let body = striptags(trans.text, [], '\n');	// 모든 태그 제거
 		body = `${header}---\n${body}\n\n---\n${footer}`;
