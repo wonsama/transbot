@@ -1,7 +1,7 @@
 {
   "name": "transbot",
   "version": "1.0.0",
-  "description": "스팀잇 용 번역 봇",
+  "description": "[transbot] steemit translation bot",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/wonsama/transbot.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/wonsama/transbot/issues"
   },
