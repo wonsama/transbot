@@ -1,5 +1,13 @@
 ### How to install with nodejs
 
+#### step 0. install nodejs
+
+```
+goto : https://nodejs.org/en/
+
+and download lastest nodejs version 
+```
+
 #### step 1. clone project
 
 `$ git clone https://github.com/wonsama/transbot`
