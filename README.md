@@ -37,6 +37,7 @@ _cons_
 > See the [code sheets](https://steemit.com/wtrans/@wonsama/wtrans-google-translation-codes) for internal codes.
 
 ![me](https://github.com/wonsama/transbot/raw/master/images/me.png)
+
 [Screenshot 1 : Translate typed text ]
 
 #### 2. #wtransup : Translate parent text
@@ -46,6 +47,7 @@ _cons_
 > See the [code sheets](https://steemit.com/wtrans/@wonsama/wtrans-google-translation-codes) for internal codes.
 
 ![up](https://github.com/wonsama/transbot/raw/master/images/up.png)
+
 [Screenshot 2 : Translate parent text ]
 
 #### 3. #wtransdel : Delete translation.
@@ -53,6 +55,7 @@ _cons_
 > #wtransdel(id) : Deletes translation text with entered id (Only your own writings can be deleted, No comments were created for deletion.)
 
 ![del](https://github.com/wonsama/transbot/raw/master/images/del.png)
+
 [Screenshot 3 : Delete translation ]
 
 ### Feedback
