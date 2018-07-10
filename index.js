@@ -20,6 +20,10 @@ const MONITOR_COMMAND_WTRANSUP = IS_TEST_MODE?'#testup':'#wtransup';
 const MONITOR_COMMAND_WTRANSME = IS_TEST_MODE?'#testme':'#wtransme';
 const MONITOR_COMMAND_WTRANSDEL = IS_TEST_MODE?'#testdel':'#wtransdel';
 
+const TRANSBOT_MANUAL_KO_LINK = 'https://steemit.com/kr/@wonsama/kr-dev-v1-1-0-wtransme-wtransup-wtransdel';
+const TRANSBOT_MANUAL_EN_LINK = 'https://steemit.com/utopian-io/@wonsama/wtrans-translation-bot-wtransme-wtransup-translate-with-comments';
+
+
 /*
 [ [ 'comment',
     { parent_author: 'wonsama',
@@ -68,9 +72,11 @@ async function wtransup(item){
 			let reply;
 			let time = new Date().getTime();
 			let header = `${_getLang(trans.from.language.iso)} has been translated into ${_getLang(lang)}.\n\n`;
-			let footer = `created by @wonsama / id [ ${time} ] / upvote this if it helps :)\n`;
-			let body = `${header}---\n${trans.text}\n\n---\n${footer}`;
-			body = striptags(body, [], '\n');	// 모든 태그 제거
+			let footer = `created by @wonsama / id [ ${time} ] / [메뉴얼](${TRANSBOT_MANUAL_KO_LINK}) [MANUAL](${TRANSBOT_MANUAL_EN_LINK}) \n`;
+			// let body = `${header}---\n${trans.text}\n\n---\n${footer}`;
+			let body = striptags(trans.text, [], '\n');	// 모든 태그 제거
+			body = `${header}---\n${body}\n\n---\n${footer}`;
+
 
 			let wif = STEEM_TRANS_KEY_POSTING;
 			let author = STEEM_TRANS_AUTHOR;
@@ -129,9 +135,10 @@ async function wtransme(item){
 		let reply;
 		let time = new Date().getTime();
 		let header = `${_getLang(trans.from.language.iso)} has been translated into ${_getLang(lang)}.\n\n`;
-		let footer = `created by @wonsama / id [ ${time} ] / upvote this if it helps :)\n`;
-		let body = `${header}---\n${trans.text}\n\n---\n${footer}`;
-		body = striptags(body, [], '\n');	// 모든 태그 제거
+		let footer = `created by @wonsama / id [ ${time} ] / [메뉴얼](${TRANSBOT_MANUAL_KO_LINK}) [MANUAL](${TRANSBOT_MANUAL_EN_LINK}) \n`;
+		// let body = `${header}---\n${trans.text}\n\n---\n${footer}`;
+		let body = striptags(trans.text, [], '\n');	// 모든 태그 제거
+		body = `${header}---\n${body}\n\n---\n${footer}`;
 
 		let wif = STEEM_TRANS_KEY_POSTING;
 		let author = STEEM_TRANS_AUTHOR;

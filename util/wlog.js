@@ -72,9 +72,6 @@ fn.info = (json, type='')=>{
 
   try{
     // 로그를 JSON 형태로 append 하여 기록
-    console.log('STEEM_TRANS_ROOT', STEEM_TRANS_ROOT);
-    console.log('STEEM_TRANS_FOLDER_INFO', STEEM_TRANS_FOLDER_INFO);
-
     fs.appendFile( filePath, JSON.stringify(data) + '\n', FILE_CHARSET_UTF8, (err)=>{
       if(err){
         // file write error 
