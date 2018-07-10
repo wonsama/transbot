@@ -28,11 +28,13 @@ _cons_
 * Wtrans using google translation.( may be strange translations )
 * Can be translated up to 5,000 characters
 
-#### How to install
+#### How to install & cutomize
 
 See [INSTALL](https://github.com/wonsama/transbot/blob/master/INSTALL.md).
 
 ### How to use in steemit.
+
+> No installation required. Just try it now in steemit !
 
 #### 1. #wtransme : Translate typed text
 

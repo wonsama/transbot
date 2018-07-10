@@ -34,3 +34,23 @@ export STEEM_TRANS_APP=version
 #### step 4. run project
 
 `$ node .`
+
+### Cutomize to project
+
+> You can change the command and function by referring to the source code below.
+
+#### modify command in index.js
+
+> change your monitoring commands in replies
+
+```
+
+const MONITOR_COMMAND_WTRANSUP = IS_TEST_MODE?'#testup':'#wtransup';
+const MONITOR_COMMAND_WTRANSME = IS_TEST_MODE?'#testme':'#wtransme';
+const MONITOR_COMMAND_WTRANSDEL = IS_TEST_MODE?'#testdel':'#wtransdel';
+
+```
+
+#### you can add & modify functions in index.js
+
+> make your own like this `wtransup() , wtransme(), wtransdel()`  functions
