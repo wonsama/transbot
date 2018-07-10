@@ -69,3 +69,4 @@ run.sh
 
 last_block.txt
 last_launched.txt
+nohup.out
