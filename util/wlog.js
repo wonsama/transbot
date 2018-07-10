@@ -1,4 +1,4 @@
-const fs = require('fs');  // 참고로 promises 는 v10 부터 나왔고, 실험용 이라는 디버깅로그가 찍힘에 유의
+const fs = require('fs');
 const dateformat = require('dateformat');
 
 let fn = {};
@@ -10,7 +10,9 @@ const STEEM_TRANS_FOLDER_ERR = process.env.STEEM_TRANS_FOLDER_ERR?STEEM_TRANS_RO
 const STEEM_TRANS_FOLDER_INFO = process.env.STEEM_TRANS_FOLDER_INFO?STEEM_TRANS_ROOT+process.env.STEEM_TRANS_FOLDER_INFO:STEEM_TRANS_ROOT+'/info';
 
 /*
-* 로그성 메시지를 출력한다
+* print log message
+* @param msg message
+* @param isShow visibility
 */ 
 fn.log = (msg, isShow=true) => {
   if(isShow){
@@ -19,19 +21,19 @@ fn.log = (msg, isShow=true) => {
 }
 
 /*
-* 입력경로 기준으로 폴더를 생성한다 ( recursive 하게 생성 )
-* @param path 경로 
+* make folder with recursive
+* @param path path of folder
 */ 
 fn.makeFolder = (path) =>{
   const sep = require('path').sep;
   const folders = path.split(sep);
 
-  // 전체 경로가 존재하는지 여부 확인 
+  // check path is exist
   if(!fs.existsSync(path)){
     let paths = [];
     try{
 
-      // 상위 폴더 부터 해서 차근차근 만들어 간다, SYNC
+      // make folder with recursivly
       for(let f of folders){
         paths.push(f);
         let p = paths.join(sep);
@@ -46,10 +48,10 @@ fn.makeFolder = (path) =>{
 }
 
 /*
-* 알림 메시지를 파일에 기록한다(ASYNC, APPEND, JSON)
-* TODO : 나중에는 mongodb에 기록
-* @param json 기록할 메시지 (JSON)
-* @param type 구분 분류를 위한 타입 (STRING)
+* write info message (ASYNC, APPEND, JSON)
+* TODO : write on mongodb with batch process
+* @param json write message (json)
+* @param type type for division
 */ 
 fn.info = (json, type='')=>{
 
@@ -67,11 +69,11 @@ fn.info = (json, type='')=>{
     return false;
   }
 
-  // 로그를 저장할 폴더 확인 또는 생성
+  // check folder exist & make log folder
   fn.makeFolder(STEEM_TRANS_FOLDER_INFO);
 
   try{
-    // 로그를 JSON 형태로 append 하여 기록
+    // append log with json
     fs.appendFile( filePath, JSON.stringify(data) + '\n', FILE_CHARSET_UTF8, (err)=>{
       if(err){
         // file write error 
@@ -88,10 +90,10 @@ fn.info = (json, type='')=>{
 }
 
 /*
-* 애러 메시지를 파일에 기록한다(ASYNC, APPEND, JSON)
-* TODO : 나중에는 mongodb에 기록
-* @param json 기록할 메시지 (JSON)
-* @param type 구분 분류를 위한 타입 (STRING)
+* write error message (ASYNC, APPEND, JSON)
+* TODO : write on mongodb with batch process
+* @param json write message (json)
+* @param type type for division
 */ 
 fn.error = (json, type='')=>{
 
@@ -113,11 +115,11 @@ fn.error = (json, type='')=>{
     return false;
   }
 
-  // 로그를 저장할 폴더 확인 또는 생성
+  // append log with json
   fn.makeFolder(STEEM_TRANS_FOLDER_ERR);
 
   try{
-    // 로그를 JSON 형태로 append 하여 기록
+    // append log with json
     fs.appendFile( filePath, JSON.stringify(data) + '\n', FILE_CHARSET_UTF8, (err)=>{
       if(err){
 

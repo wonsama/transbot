@@ -113,10 +113,10 @@ fn._getLang = (key) => {
 }
 
 /*
-* 명령어(내용) 내용을 반환한다, 처음 명령을 변환처리 한다, 찾지 못하면 null
-* @param source 문자열
-* @param commands 명령어  
-* @return 찾은(내용) 
+* get command from source text
+* @param source body contents
+* @param commands find command string
+* @return commands
 */
 fn.getCommand = (source, commands) => {
 	const FIND_STR = commands;
@@ -141,8 +141,11 @@ fn.getCommand = (source, commands) => {
 }
 
 /*
-* source 에서 commands 를 포함하는 경우 파싱하여 언어 타입 정보를 가져온다
-* @return 언어타입
+* get language type from source text with commands
+* @param source body contents
+* @param commands find command string
+* @param defaults defaults language
+* @return languages
 */
 fn.getLang = (source, commands, defaults='ko') => {
 
@@ -162,10 +165,10 @@ fn.getLang = (source, commands, defaults='ko') => {
 			return defaults;	
 		}	
 	}else if(source.includes(FIND_STR)){
-		// 기본값으로 영어 변환
+		// default is korean
 		return defaults;
 	}
-	// 존재하지 않음
+	// not exist
 	return null;
 }
 

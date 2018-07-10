@@ -1,30 +1,36 @@
-const {monitor} = require ('./util/wmonitor');		// 스팀잇 댓글 모니터링
-const {to} = require ('./util/wutil');						// async 처리
-const {getLang} = require ('./util/wlangs');			// 구글번역 지원 언어 확인
-const {getCommand} = require ('./util/wlangs');		// 명령어 내부 값 추출
-const {_getLang} = require ('./util/wlangs');			// 구글번역 지원 언어 확인
-const wlog = require('./util/wlog');							// 로그
+// project utils
+const {monitor} = require ('./util/wmonitor');		// monitoring
+const {to} = require ('./util/wutil');						// async 
+const {getLang} = require ('./util/wlangs');			// check languages
+const {getCommand} = require ('./util/wlangs');		// Extract Commands
+const {_getLang} = require ('./util/wlangs');			// check languages
+const wlog = require('./util/wlog');							// logs
 
+// 3rd party api
+const steem = require('steem');											// steem api
+const translate = require('google-translate-api');	// google translator
+const striptags = require('striptags');							// strip tags
 
-const steem = require('steem');
-const translate = require('google-translate-api');
-const striptags = require('striptags');
-
+// load environment properties
 const STEEM_TRANS_APP = process.env.STEEM_TRANS_APP?process.env.STEEM_TRANS_APP:'wtrans/v1.0.0';
 const STEEM_TRANS_AUTHOR = process.env.STEEM_TRANS_AUTHOR;
 const STEEM_TRANS_KEY_POSTING = process.env.STEEM_TRANS_KEY_POSTING;
 
-const IS_TEST_MODE = false;						// 테스트 할 때에는 커맨드를 별도로 사용하도록 함
-const CUT_BODY_LENGTH = 5000; 				// 구글번역은 최대 5000자 까지 가능, 물론 split하면 되지만 5000 글자 자체가 많음.
+// Commands to watch
+const IS_TEST_MODE = true;						// set test mode
+const CUT_BODY_LENGTH = 5000; 				// max is 5000
 const MONITOR_COMMAND_WTRANSUP = IS_TEST_MODE?'#testup':'#wtransup';
 const MONITOR_COMMAND_WTRANSME = IS_TEST_MODE?'#testme':'#wtransme';
 const MONITOR_COMMAND_WTRANSDEL = IS_TEST_MODE?'#testdel':'#wtransdel';
 
+// manual link
 const TRANSBOT_MANUAL_KO_LINK = 'https://steemit.com/kr/@wonsama/kr-dev-v1-1-0-wtransme-wtransup-wtransdel';
 const TRANSBOT_MANUAL_EN_LINK = 'https://steemit.com/utopian-io/@wonsama/wtrans-translation-bot-wtransme-wtransup-translate-with-comments';
 
-
 /*
+
+sample of reponse
+
 [ [ 'comment',
     { parent_author: 'wonsama',
       parent_permlink: 'voteview-wonsama-1530288386275',
@@ -32,19 +38,19 @@ const TRANSBOT_MANUAL_EN_LINK = 'https://steemit.com/utopian-io/@wonsama/wtrans-
       permlink:
        're-wonsama-voteview-wonsama-1530288386275-20180706t091541980z',
       title: '',
-      body: '와우 !\n\n#wtrans\n\n번역이 되냐 ?',
+      body: 'wow !\n\n#wtrans\n\ntranslate is possible ?',
       json_metadata: '{"tags":["voteview","wtrans"],"app":"steemit/0.1"}' } ] ]
 */
 
 /*
-* 댓글 분석 수행 - wtransup / 상위 글 번역
-* @param item 댓글정보
+* analisys - wtransup / translate parent text
+* @param item replies
 */
 async function wtransup(item){
 
 	let err;
 
-	// 댓글 링크 정보 출력
+	// print replies log
 	wlog.info({
 		parent_author:item.parent_author,
 		parent_permlink:item.parent_permlink,
@@ -56,31 +62,30 @@ async function wtransup(item){
 		url:`https://steemit.com/@${item.author}/${item.permlink}`
 	},'wtransup_reply');
 
-	// STEP 1 : 부모글 정보 조회 
+	// STEP 1 : get parent contents information
 	[err, par] = await to(steem.api.getContentAsync(item.parent_author, item.parent_permlink));	
 	if(!err){
 
-		// STEP 2 : 부모글의 body를 번역 수행
+		// STEP 2 : Perform translation of the parent content.
 		let contents = par.body.substr(0, CUT_BODY_LENGTH);
-		contents = contents.replace(/\!\[(.*?)\]\((.*?)\)/gi,'$2');	// 이미지 앞에 태그 제거
+		contents = contents.replace(/\!\[(.*?)\]\((.*?)\)/gi,'$2');	// remove markdown image tag
 		let lang = getLang(item.body, MONITOR_COMMAND_WTRANSUP).toLowerCase();
 		let trans;
 		[err, trans] = await to(translate(contents, {to:lang}));
 		
 		if(!err){
-			// STEP 3 : 댓글 작성하기
+			// STEP 3 : create comment
 			let reply;
 			let time = new Date().getTime();
 			let header = `${_getLang(trans.from.language.iso)} has been translated into ${_getLang(lang)}.\n\n`;
 			let footer = `created by @wonsama / id [ ${time} ] / [메뉴얼](${TRANSBOT_MANUAL_KO_LINK}) / [MANUAL](${TRANSBOT_MANUAL_EN_LINK}) \n`;
-			// let body = `${header}---\n${trans.text}\n\n---\n${footer}`;
-			let body = striptags(trans.text, [], '\n');	// 모든 태그 제거
+			let body = striptags(trans.text, [], '\n');	// Remove All Tags
 			body = `${header}---\n${body}\n\n---\n${footer}`;
 
 
 			let wif = STEEM_TRANS_KEY_POSTING;
 			let author = STEEM_TRANS_AUTHOR;
-			let permlink = `${item.author}-wtrans-${time}`;	// 삭제를 위해 통일, 삭제코드는 시간
+			let permlink = `${item.author}-wtrans-${time}`;	// make permlink same way
 			let title = '';
 			let jsonMetadata = {
 				tags:['wonsama','wtrans'],
@@ -101,48 +106,46 @@ async function wtransup(item){
 	}
 
 	if(err){
-		// TODO : 오류가 발생하면 마지막 읽어들인 블록 정보를 이전으로 돌려서 작업 수행하는 것을 고려
+		// TODO : Consider working manually when an error occurs
 		wlog.error(err, 'wtransup_analisys');
 		return Promise.reject(err);
 	}
-	// TODO : 오류 발생건은 파일에 기록하여 수동으로 작업을 처리할 수 있는 메소드를 별도 생성
 }
 
 /*
-* 댓글 분석 수행 - wtransme / 내 댓글 번역
-* @param item 댓글정보
+* analisys - wtransme / translate typed text
+* @param item replies
 */
 async function wtransme(item){
 
 	let err;
 
-	// 댓글 링크 정보 출력
+	// print replies log
 	wlog.info({
 		author:item.author,
 		permlink:item.permlink,
 		url:`https://steemit.com/@${item.author}/${item.permlink}`
 	},'wtransme_reply');
 
-	// STEP 1 : 내글의 body를 번역 수행
+	// STEP 1 : Perform translation of the typed comment.
 	let contents = item.body.substr(0, CUT_BODY_LENGTH);
-	contents = contents.replace(/\!\[(.*?)\]\((.*?)\)/gi,'$2');	// 이미지 앞에 태그 제거
+	contents = contents.replace(/\!\[(.*?)\]\((.*?)\)/gi,'$2');	// remove markdown image tag
 	let lang = getLang(item.body, MONITOR_COMMAND_WTRANSME).toLowerCase();
 	let trans;
 	[err, trans] = await to(translate(contents, {to:lang}));
 	
 	if(!err){
-		// STEP 2 : 댓글 작성하기
+		// STEP 2 : create comment
 		let reply;
 		let time = new Date().getTime();
 		let header = `${_getLang(trans.from.language.iso)} has been translated into ${_getLang(lang)}.\n\n`;
 		let footer = `created by @wonsama / id [ ${time} ] / [메뉴얼](${TRANSBOT_MANUAL_KO_LINK}) / [MANUAL](${TRANSBOT_MANUAL_EN_LINK}) \n`;
-		// let body = `${header}---\n${trans.text}\n\n---\n${footer}`;
-		let body = striptags(trans.text, [], '\n');	// 모든 태그 제거
+		let body = striptags(trans.text, [], '\n');	// Remove All Tags
 		body = `${header}---\n${body}\n\n---\n${footer}`;
 
 		let wif = STEEM_TRANS_KEY_POSTING;
 		let author = STEEM_TRANS_AUTHOR;
-		let permlink = `${item.author}-wtrans-${time}`;	// 삭제를 위해 통일, 삭제코드는 시간
+		let permlink = `${item.author}-wtrans-${time}`;	// make permlink same way
 		let title = '';
 		let jsonMetadata = {
 			tags:['wonsama','wtrans'],
@@ -162,38 +165,38 @@ async function wtransme(item){
 	}
 
 	if(err){
-		// TODO : 오류가 발생하면 마지막 읽어들인 블록 정보를 이전으로 돌려서 작업 수행하는 것을 고려
+		// TODO : Consider working manually when an error occurs
 		wlog.error(err, 'wtransme_analisys');
 		return Promise.reject(err);
 	}
-	// TODO : 오류 발생건은 파일에 기록하여 수동으로 작업을 처리할 수 있는 메소드를 별도 생성
 }
 
+
 /*
-* 댓글 분석 수행 - wtransdel / 번역 완료된 댓글 삭제
-* @param item 댓글정보
+* analisys - wtransme / delete translate text by id
+* @param item replies
 */
 async function wtransdel(item){
 
 	let err;
 
-	// 댓글 링크 정보 출력
+	// print replies log
 	wlog.info({
 		author:item.author,
 		permlink:item.permlink,
 		url:`https://steemit.com/@${item.author}/${item.permlink}`
 	},'wtransdel_reply');
 
-	// STEP 1 : 내글의 body를 번역 수행
+	// STEP 1 : get information of the typed comment.
 	let contents = item.body.substr(0, CUT_BODY_LENGTH);
-	let id = getCommand(item.body, MONITOR_COMMAND_WTRANSDEL);	// id 값이라 반드시 숫자여야 됨
+	let id = getCommand(item.body, MONITOR_COMMAND_WTRANSDEL);	// id Value must be numeric
 	if(id==null||isNaN(id)){
 		let errmsg = `cmd is (${id}), cmd must number !`;
 		wlog.error(errmsg, 'wtransdel_empty');
 		return Promise.reject(errmsg);
 	}
 
-	// 삭제할 번역글 정보 출력
+	// Print the translation information to delete
 	let permlink = `${item.author}-wtrans-${id}`;
 	wlog.info({
 		author:item.author,
@@ -202,7 +205,7 @@ async function wtransdel(item){
 		url:`https://steemit.com/@${STEEM_TRANS_AUTHOR}/${permlink}`
 	},'wtransdel_translation');
 		
-	// STEP 2 : 댓글 지우기
+	// STEP 2 : delete comments
 	let reply;
 	[err, reply] = await to(steem.broadcast.deleteCommentAsync(STEEM_TRANS_KEY_POSTING, STEEM_TRANS_AUTHOR, permlink));
 	if(!err){
@@ -215,62 +218,64 @@ async function wtransdel(item){
 	}
 
 	if(err){
-		// TODO : 오류가 발생하면 마지막 읽어들인 블록 정보를 이전으로 돌려서 작업 수행하는 것을 고려
+		// TODO : Consider working manually when an error occurs
 		wlog.error(err, 'wtransdel_reply');
 		return Promise.reject(err);
 	}
 
-	// STEP 3 : 삭제가 완료/실패 했다는 댓글 달아주기, 안하는게 낳을듯 또 지워야 됨 !
-	// 나중에 필요시 
+	// if needed
+	// STEP 3 : Comment that deletion has been completevery
 	
 }
 
 /*
-* 댓글 분석 수행 - 진입점
+* entry point
 */
 function init(){
 
-	// 모니터링 시작
+	// start monitoring
 	monitor()
 
-	// 댓글 정보를 얻어와 이후 작업 수행
+	// get comments information to perform next actions.
 	.then(async replies=>{
 
-		// 커맨드를 포함한 것을 필터링 + 부모글 작성자가 wdev가 아니어야 됨
+		// Filter with command + Not equal parent writer and reply author.
 		try{
 
-			// #wtransup (상위 글 번역)
+			// #wtransup (translation of parent)
 			let replies_wtransup = replies.filter(data=>data[1].body.indexOf(MONITOR_COMMAND_WTRANSUP)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
 			for(let item of replies_wtransup){
-				// 분석 수행
-				await wtransup(item[1]);	// 딱히 여기도 애러처리는 안해도 될듯
+				// Perform Analysis
+				await wtransup(item[1]);	// No need to error handling
 			}
 
-			// #wtransme (현재 글 번역)
+			// #wtransme (translation of typed)
 			let replies_wtransme = replies.filter(data=>data[1].body.indexOf(MONITOR_COMMAND_WTRANSME)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
 			for(let item of replies_wtransme){
-				// 분석 수행
-				await wtransme(item[1]);	// 딱히 여기도 애러처리는 안해도 될듯
+				// Perform Analysis
+				await wtransme(item[1]);	// No need to error handling
 			}
 
-			// #wtransdel (번역 글 삭제)
+			// #wtransdel (delete translation)
 			let replies_wtransdel = replies.filter(data=>data[1].body.indexOf(MONITOR_COMMAND_WTRANSDEL)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
 			for(let item of replies_wtransdel){
-				// 분석 수행
-				await wtransdel(item[1]);	// 딱히 여기도 애러처리는 안해도 될듯
+				// Perform Analysis
+				await wtransdel(item[1]);	// No need to error handling
 			}
 
 		}catch(e){
 			wlog.error(e, 'monitor_e');
 		}
 		
-		// 다시 모니터링을 수행한다
+		// Perform monitoring again when an error occurs.
 		init();
 
 	})
 	.catch(err=>{
+
+		// Perform monitoring again
 		wlog.error(err, 'monitor_err');
 		init();
-	});	// 오류나도 다시 모니터링 수행 
+	});
 }
 init();

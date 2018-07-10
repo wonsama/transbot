@@ -1,23 +1,29 @@
 let fn = {};
 
-// 시간을 연산한다 
-// h : 시간 
+/*
+* calculate time
+* @param h hours
+* @return new date
+*/
 Date.prototype.addHours = function(h) {
     this.setTime(this.getTime() + (h * 60 * 60 * 1000));
     return this;
 }
 
 /*
-* 현재 시간 기준 입력받은 시간을 기준으로 변경된 시간 정보를 반환한다
-* @param h 입력 받은 시간
-* @return 현재 시간 기준 입력받은 시간을 기준으로 변경된 시간
+* add current hour
+* @param h hour
+* @return new date
 */
 fn.getNowCHour = (h) =>{
 	return new Date().addHours(h);
 }
 
-// created 정보를 Date로 변환 => 한국 +9
-// created : 생성시간 
+/*
+* get localtime from iso string
+* @param created created date time
+* @return new date
+*/
 fn.getLocalTime = (created)=>{
 
 	if(!created){
@@ -29,9 +35,11 @@ fn.getLocalTime = (created)=>{
 	}
 }
 
-// 이전 날짜를 반환한다
-// day : 몇일전
-// startWithZero : 00:00:00 일 부터 시작할지 여부
+/*
+* get before date
+* @param day day before number
+* @return new date
+*/
 fn.getBeforeDate = (day, startWithZero=true)=>{
 	var date = new Date();
 	date.setDate(date.getDate() - day);
