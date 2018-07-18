@@ -21,12 +21,11 @@ const STEEM_TRANS_KEY_POSTING = process.env.STEEM_TRANS_KEY_POSTING;
 const STEEM_TRANS_IS_TEST = toBoolean(process.env.STEEM_TRANS_IS_TEST);
 
 // Commands to watch
-const IS_TEST_MODE = true;						// set test mode
 const CUT_BODY_LENGTH = 5000; 				// max is 5000
-const MONITOR_COMMAND_WTRANSUP = IS_TEST_MODE?'#testup':'#wtransup';
-const MONITOR_COMMAND_WTRANSME = IS_TEST_MODE?'#testme':'#wtransme';
-const MONITOR_COMMAND_WTRANSDEL = IS_TEST_MODE?'#testdel':'#wtransdel';
-const MONITOR_COMMAND_WDICE = IS_TEST_MODE?'#testdice':'#wdice';
+const MONITOR_COMMAND_WTRANSUP = STEEM_TRANS_IS_TEST?'#testup':'#wtransup';
+const MONITOR_COMMAND_WTRANSME = STEEM_TRANS_IS_TEST?'#testme':'#wtransme';
+const MONITOR_COMMAND_WTRANSDEL = STEEM_TRANS_IS_TEST?'#testdel':'#wtransdel';
+const MONITOR_COMMAND_WDICE = STEEM_TRANS_IS_TEST?'#testdice':'#wdice';
 
 // manual link
 const TRANSBOT_MANUAL_KO_LINK = 'https://steemit.com/kr/@wonsama/kr-dev-v1-1-0-wtransme-wtransup-wtransdel';

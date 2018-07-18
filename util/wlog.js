@@ -106,9 +106,9 @@ fn.error = (json, type='')=>{
   data.type = type;
   data.json = json;
   data.jsonString = json.toString();
-  if(json.stack){
-    data.jsonStack = json.stack;  // error
-  }
+  // if(json.stack){
+  //   data.jsonStack = json.stack;  // error
+  // }
 
   if(!json){
     console.error(new Date().toISOString(), '[wlog error] error : input json empty');

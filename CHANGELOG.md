@@ -1,3 +1,8 @@
+# 1.1.2
+
+* added testmode
+* remove stack trace log
+
 # 1.1.1
 
 * added isBoolean
