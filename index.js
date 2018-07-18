@@ -4,7 +4,9 @@ const {to} = require ('./util/wutil');						// async
 const {getLang} = require ('./util/wlangs');			// check languages
 const {getCommand} = require ('./util/wlangs');		// Extract Commands
 const {_getLang} = require ('./util/wlangs');			// check languages
+const {rndInt} = require ('./util/wutil');				// get random int value
 const wlog = require('./util/wlog');							// logs
+
 
 // 3rd party api
 const steem = require('steem');											// steem api
@@ -22,6 +24,7 @@ const CUT_BODY_LENGTH = 5000; 				// max is 5000
 const MONITOR_COMMAND_WTRANSUP = IS_TEST_MODE?'#testup':'#wtransup';
 const MONITOR_COMMAND_WTRANSME = IS_TEST_MODE?'#testme':'#wtransme';
 const MONITOR_COMMAND_WTRANSDEL = IS_TEST_MODE?'#testdel':'#wtransdel';
+const MONITOR_COMMAND_WDICE = IS_TEST_MODE?'#testdice':'#wdice';
 
 // manual link
 const TRANSBOT_MANUAL_KO_LINK = 'https://steemit.com/kr/@wonsama/kr-dev-v1-1-0-wtransme-wtransup-wtransdel';
@@ -229,9 +232,82 @@ async function wtransdel(item){
 }
 
 /*
+* run dice
+* @param item replies
+*/
+async function wdice(item){
+
+	// 🎲
+
+	let err;
+
+	// print replies log
+	wlog.info({
+		author:item.author,
+		permlink:item.permlink,
+		url:`https://steemit.com/@${item.author}/${item.permlink}`
+	},'wdice_start');
+
+	// STEP 1 : get information of the typed comment.
+	let contents = item.body.substr(0, CUT_BODY_LENGTH);
+	let range = getCommand(item.body, MONITOR_COMMAND_WDICE);	// max value must be numeric
+	// if(id==null||isNaN(id)){
+	// 	let errmsg = `cmd is (${id}), cmd must number !`;
+	// 	wlog.error(errmsg, 'wtransdel_empty');
+	// 	return Promise.reject(errmsg);
+	// }
+	let start = 1;
+	let end = 100;
+	if(range){
+		let ss = range.split(',');
+		if(ss.length==1 && !isNaN(ss[0])){
+			end = Number(ss[0]);
+		}else if(ss.length>=2 && !isNaN(ss[0]) && !isNaN(ss[1])){
+			start = Number(ss[0]);
+			end = Number(ss[1]);
+		}
+	}
+		
+	if(!err){
+		// STEP 2 : create comment
+		let reply;
+		let time = new Date().getTime();
+		let body = `🎲주사위를 굴려 ${rndInt(start,end)} 이(가) 나왔습니다.`;
+
+		let wif = STEEM_TRANS_KEY_POSTING;
+		let author = STEEM_TRANS_AUTHOR;
+		let permlink = `${item.author}-wdice-${time}`;	// make permlink same way
+		let title = '';
+		let jsonMetadata = {
+			tags:['wonsama','wdice'],
+			app: STEEM_TRANS_APP,
+			format: 'markdown'
+		};
+		[err, reply] = await to(steem.broadcast.commentAsync(wif, item.author, item.permlink, author, permlink, title, body, jsonMetadata));
+
+		if(!err){
+			wlog.info({
+				author:author,
+				permlink:permlink,
+				url:`https://steemit.com/@${author}/${permlink}`
+			},'wdice_reply');
+			return Promise.resolve(reply);
+		}
+	}
+
+	if(err){
+		// TODO : Consider working manually when an error occurs
+		wlog.error(err, 'wdice_error');
+		return Promise.reject(err);
+	}
+}
+
+/*
 * entry point
 */
 function init(){
+
+
 
 	// start monitoring
 	monitor()
@@ -263,6 +339,13 @@ function init(){
 				await wtransdel(item[1]);	// No need to error handling
 			}
 
+			// #wdice
+			let replies_wdice = replies.filter(data=>data[1].body.indexOf(MONITOR_COMMAND_WDICE)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
+			for(let item of replies_wdice){
+				// Perform Analysis
+				await wdice(item[1]);	// No need to error handling
+			}
+
 		}catch(e){
 			wlog.error(e, 'monitor_e');
 		}
@@ -279,3 +362,4 @@ function init(){
 	});
 }
 init();
+wlog.info('start program');
