@@ -23,6 +23,19 @@ fn.getNumber = (source) =>{
 }
 
 /*
+* check input value is true
+* @param source text value
+* @return is true ?
+*/
+fn.toBoolean = (source) =>{
+	try{
+		return JSON.parse(source.toLowerCase())===true;
+	}catch(e){
+		return false;
+	}
+}
+
+/*
 * return random integer value
 * if end value is empty then run with 1 to start
 * @param start start int value

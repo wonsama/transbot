@@ -5,6 +5,7 @@ const {getLang} = require ('./util/wlangs');			// check languages
 const {getCommand} = require ('./util/wlangs');		// Extract Commands
 const {_getLang} = require ('./util/wlangs');			// check languages
 const {rndInt} = require ('./util/wutil');				// get random int value
+const {toBoolean} = require ('./util/wutil');			// is true ?
 const wlog = require('./util/wlog');							// logs
 
 
@@ -17,6 +18,7 @@ const striptags = require('striptags');							// strip tags
 const STEEM_TRANS_APP = process.env.STEEM_TRANS_APP?process.env.STEEM_TRANS_APP:'wtrans/v1.0.0';
 const STEEM_TRANS_AUTHOR = process.env.STEEM_TRANS_AUTHOR;
 const STEEM_TRANS_KEY_POSTING = process.env.STEEM_TRANS_KEY_POSTING;
+const STEEM_TRANS_IS_TEST = toBoolean(process.env.STEEM_TRANS_IS_TEST);
 
 // Commands to watch
 const IS_TEST_MODE = true;						// set test mode
