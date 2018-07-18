@@ -30,7 +30,7 @@ fn.command = async (item) =>{
 		author:item.author,
 		permlink:item.permlink,
 		url:`https://steemit.com/@${item.author}/${item.permlink}`
-	},'wdice_start');
+	},'wjankenpo_start');
 
 	if(!err){
 		// STEP 1 : create comment

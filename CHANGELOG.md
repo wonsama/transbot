@@ -1,3 +1,7 @@
+# 1.2.1
+
+* minor bug fix
+
 # 1.2.0
 
 * added jankenpo
