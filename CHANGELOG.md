@@ -1,3 +1,7 @@
+# 1.1.3
+
+* reply wait 20 sec added.
+
 # 1.1.2
 
 * added testmode

@@ -7,6 +7,7 @@ const {_getLang} = require ('./util/wlangs');			// check languages
 const {rndInt} = require ('./util/wutil');				// get random int value
 const {toBoolean} = require ('./util/wutil');			// is true ?
 const wlog = require('./util/wlog');							// logs
+const {sleep} = require ('./util/wutil');					// sleep
 
 
 // 3rd party api
@@ -30,6 +31,9 @@ const MONITOR_COMMAND_WDICE = STEEM_TRANS_IS_TEST?'#testdice':'#wdice';
 // manual link
 const TRANSBOT_MANUAL_KO_LINK = 'https://steemit.com/kr/@wonsama/kr-dev-v1-1-0-wtransme-wtransup-wtransdel';
 const TRANSBOT_MANUAL_EN_LINK = 'https://steemit.com/utopian-io/@wonsama/wtrans-translation-bot-wtransme-wtransup-translate-with-comments';
+
+
+const WAIT_FOR_REPLY = 20 * 1000;
 
 /*
 
@@ -103,7 +107,11 @@ async function wtransup(item){
 					author:author,
 					permlink:permlink,
 					url:`https://steemit.com/@${author}/${permlink}`
-				},'wtransup_translation');
+				},'wtransup_translation_wait');
+
+				// wait for 20 sec.
+				await to(sleep(WAIT_FOR_REPLY));
+
 				return Promise.resolve(reply);
 			}
 		}
@@ -163,7 +171,11 @@ async function wtransme(item){
 				author:author,
 				permlink:permlink,
 				url:`https://steemit.com/@${author}/${permlink}`
-			},'wtransme_translation');
+			},'wtransme_translation_wait');
+
+			// wait for 20 sec.
+			await to(sleep(WAIT_FOR_REPLY));
+
 			return Promise.resolve(reply);
 		}
 	}
@@ -291,7 +303,11 @@ async function wdice(item){
 				author:author,
 				permlink:permlink,
 				url:`https://steemit.com/@${author}/${permlink}`
-			},'wdice_reply');
+			},'wdice_reply_wait');
+
+			// wait for 20 sec.
+			await to(sleep(WAIT_FOR_REPLY));
+
 			return Promise.resolve(reply);
 		}
 	}
