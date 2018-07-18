@@ -1,3 +1,8 @@
+# 1.2.0
+
+* added jankenpo
+* added cmd folder & change structre
+
 # 1.1.3
 
 * reply wait 20 sec added.
