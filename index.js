@@ -31,7 +31,7 @@ function init(){
 			];
 
 			for(let mon of mon_fn){
-				// do not process duplicate posts : data[1].body.indexOf("@@")!=0
+				// do not process modified posts : data[1].body.indexOf("@@")!=0
 				let replies_filtered = replies.filter(data=>data[1].body.indexOf("@@")!=0 && data[1].body.indexOf(mon.name)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
 				for(let item of replies_filtered){
 					// Perform Analysis

@@ -1,10 +1,16 @@
+# 1.2.4
+
+* do not process modified posts
+* check time : created & lastupdate
+
 # 1.2.3
 
 * minor bug fix
 
 # 1.2.2
 
-* do not process duplicate posts
+* do not process modified posts
+* start with @@ is except
 
 # 1.2.1
 

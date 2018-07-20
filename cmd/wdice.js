@@ -36,6 +36,15 @@ fn.command = async (item) =>{
 		url:`https://steemit.com/@${item.author}/${item.permlink}`
 	},'wdice_start');
 
+	// STEP 0 : get contents information & check is modified
+	let cur;
+	[err, cur] = await to(steem.api.getContentAsync(item.author, item.permlink));
+	if(!err){
+		if(cur.created!=cur.last_update){
+			return Promise.reject(`https://steemit.com/@${item.author}/${item.permlink} is modified contents.`);
+		}
+	}
+
 	// STEP 1 : get information of the typed comment.
 	let range = getCommand(item.body, MONITOR_COMMAND);	// max value must be numeric
 	let start = DEFAULT_MIN;

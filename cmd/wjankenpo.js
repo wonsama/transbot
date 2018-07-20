@@ -32,8 +32,17 @@ fn.command = async (item) =>{
 		url:`https://steemit.com/@${item.author}/${item.permlink}`
 	},'wjankenpo_start');
 
+	// STEP 1 : get contents information & check is modified
+	let cur;
+	[err, cur] = await to(steem.api.getContentAsync(item.author, item.permlink));
 	if(!err){
-		// STEP 1 : create comment
+		if(cur.created!=cur.last_update){
+			return Promise.reject(`https://steemit.com/@${item.author}/${item.permlink} is modified contents.`);
+		}
+	}
+
+	if(!err){
+		// STEP 2 : create comment
 		let reply;
 		let time = new Date().getTime();
 		let jkp_num = Math.floor(Math.random()*3)%3;
