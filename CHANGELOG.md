@@ -1,3 +1,7 @@
+# 1.2.3
+
+* minor bug fix
+
 # 1.2.2
 
 * do not process duplicate posts
