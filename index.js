@@ -9,6 +9,9 @@ const wtransdel = require ('./cmd/wtransdel');		// wtransdel
 const wtransme 	= require ('./cmd/wtransme');			// wtransdel
 const wtransup 	= require ('./cmd/wtransup');			// wtransdel
 
+const wvotetrain 	= require ('./cmd/wvotetrain');	// wvotetrain
+
+const STEEM_AUTHOR = process.env.STEEM_AUTHOR;
 const STEEM_TRANS_AUTHOR = process.env.STEEM_TRANS_AUTHOR;
 const STEEM_TRANS_IS_TEST = toBoolean(process.env.STEEM_TRANS_IS_TEST);
 
@@ -18,22 +21,36 @@ const STEEM_TRANS_IS_TEST = toBoolean(process.env.STEEM_TRANS_IS_TEST);
 function init(){
 
 	// start monitoring
-	monitor()
+	// available type : reply, vote, content
+	// monitor(['reply', 'vote', 'content'])
+	monitor(['reply', 'vote'])
 
 	// get comments information to perform next actions.
-	.then(async replies=>{
+	.then(async items=>{
 
 		// Filter with command + Not equal parent writer and reply author.
 		try{
 
-			const mon_fn = [
+			const mon_reply = [
 				wtransup, wtransme, wtransdel, wdice, wjankenpo
 			];
-
-			for(let mon of mon_fn){
+			for(let mon of mon_reply){
 				// do not process modified posts : data[1].body.indexOf("@@")!=0
-				let replies_filtered = replies.filter(data=>data[1].body.indexOf("@@")!=0 && data[1].body.indexOf(mon.name)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
-				for(let item of replies_filtered){
+				let ritem = items.reply;
+				let filtered = ritem.filter(data=>data[1].body.indexOf("@@")!=0 && data[1].body.indexOf(mon.name)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
+				for(let item of filtered){
+					// Perform Analysis
+					await mon.command(item[1]);	// No need to error handling
+				}
+			}
+
+			const mon_vote = [
+				wvotetrain
+			];
+			for(let mon of mon_vote){
+				let ritem = items.vote;
+				let filtered = ritem.filter(data=>data[1].voter==STEEM_AUTHOR);
+				for(let item of filtered){
 					// Perform Analysis
 					await mon.command(item[1]);	// No need to error handling
 				}

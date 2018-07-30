@@ -1,3 +1,7 @@
+# 1.2.5
+
+* increase types
+
 # 1.2.4
 
 * do not process modified posts

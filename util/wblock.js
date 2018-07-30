@@ -170,14 +170,26 @@ fn.getOperations = ( transactions ) =>{
 */
 fn.filterUnique = (value, index, self) => self.indexOf(value) === index;	// get unique array values
 
-/*
-* get comment information.
-* @return replies
-*/
 fn.filterReplies = operations=>{
 	let op = operations[0];
 	let data = operations[1];
 	return operations[0]=='comment' && data && data.parent_author && data.parent_author!='';
+}
+
+fn.filterContents = operations=>{
+	let op = operations[0];
+	let data = operations[1];
+	return operations[0]=='comment' && data && data.parent_author=='' && data.title!='';
+}
+
+/*
+* get comment information.
+* @return replies
+*/
+fn.filterVotes = operations=>{
+	let op = operations[0];
+	let data = operations[1];
+	return operations[0]=='vote';
 }
 
 /*	

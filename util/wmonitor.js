@@ -14,11 +14,11 @@ const SHOW_DEBUG = true;
 let lastnumber = 0;													// last block number
 let fn = {};
 
-fn.monitor = async () =>{
+fn.monitor = async (type=['reply']) =>{
 	
 	let err;
 	let blockStart,blockEnd;
-	let replies = [];
+	let filtered = {};
 
 	
 	// if network error occured, restart after 90 sec. wait...
@@ -58,12 +58,29 @@ fn.monitor = async () =>{
 					[err,blockWrite] = await to(wblock.saveBlockNumber(blockEnd));
 					if(!err){
 
-						// apply filter(extract replies)
-						replies = operations.filter(wblock.filterReplies);
+						// apply filter(extract reply)
+						if(type.includes('reply')){
+							let f_reply = operations.filter(wblock.filterReplies);
+							filtered.reply = f_reply;
+							wlog.log(`[ ${blockStart} ~ ${blockEnd} ( block : ${blockEnd - blockStart +1}, reply : ${f_reply.length} ) ]`);	
+						}
+
+						if(type.includes('content')){
+							let f_content = operations.filter(wblock.filterContents);
+							filtered.content = f_content;
+							wlog.log(`[ ${blockStart} ~ ${blockEnd} ( block : ${blockEnd - blockStart +1}, content : ${f_content.length} ) ]`);	
+						}
+
+						if(type.includes('vote')){
+							let f_vote = operations.filter(wblock.filterVotes);
+							filtered.vote = f_vote;
+							wlog.log(`[ ${blockStart} ~ ${blockEnd} ( block : ${blockEnd - blockStart +1}, vote : ${f_vote.length} ) ]`);	
+						}
+
 						lastnumber = blockEnd;
 
 						// print read block number range
-						wlog.log(`[ ${blockStart} ~ ${blockEnd} ( block : ${blockEnd - blockStart +1}, replies : ${replies.length} ) ]`);	
+						
 						wlog.log(`--------------------------------------------------`);
 					}
 				}
@@ -86,7 +103,7 @@ fn.monitor = async () =>{
 	// sleep process
 	await sleep(TIME_TO_SLEEP);
 
-	return Promise.resolve(replies);
+	return Promise.resolve(filtered);
 }
 
 module.exports = fn;
