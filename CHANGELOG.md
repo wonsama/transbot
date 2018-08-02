@@ -1,3 +1,7 @@
+# 1.2.6
+
+* add wfriends
+
 # 1.2.5
 
 * increase types

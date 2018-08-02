@@ -12,7 +12,7 @@ const WAIT_FOR_REPLY = 3 * 1000; // 보팅은 3초만 기다리면 됨
 let fn = {};
 
 /*
-* Do it Jan Ken Po & Make reply
+* 보팅 트레인
 * @param reply
 */
 fn.command = async (item) =>{
