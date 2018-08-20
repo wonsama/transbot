@@ -56,7 +56,8 @@ function init(){
 			// wfriends : 등록한 친구 새글 알림 (1일 1포스트 - 댓글로 친구의 새글 정보 기록)
 			// wanotation : 나를 언급한 것에 대해 알림  (1일 1포스트 - 댓글로 언급한 포스팅의 정보 기록)
 			const mon_content = [
-				wfriends
+				wfriends,
+				wvips
 				// , wanotation
 			];
 			for(let mon of mon_content){
