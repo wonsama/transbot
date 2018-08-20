@@ -12,6 +12,7 @@ const wtransup 	= require ('./cmd/wtransup');			// wtransdel
 const wvotetrain 	= require ('./cmd/wvotetrain');	// wvotetrain
 
 const wfriends 	= require ('./cmd/wfriends');			// wfriends
+const wvips 	= require ('./cmd/wvips');			// wvips
 
 const STEEM_AUTHOR = process.env.STEEM_AUTHOR;
 const STEEM_TRANS_AUTHOR = process.env.STEEM_TRANS_AUTHOR;
