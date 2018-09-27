@@ -79,7 +79,7 @@ fn.command = async (item) =>{
 		const P100 = 10000;
 		if(start==1 && end==100){
 			if(num==7 || num==77){
-				voteWeight = P100 * 0.7;
+				voteWeight = P100 * 0.777;
 				body+='\n럭키넘버에 당첨되어 보너스 보팅(70%)을 받았습니다.';
 			}
 			else if(num==18){
