@@ -15,10 +15,9 @@ const STEEM_TRANS_IS_TEST = toBoolean(process.env.STEEM_TRANS_IS_TEST);
 const WAIT_FOR_REPLY = 20 * 1000;
 
 const STEEM_AUTHOR = process.env.STEEM_AUTHOR;
-const STEEM_TRANS_FRIENDS = process.env.STEEM_TRANS_FRIENDS;
+const STEEM_TRANS_FRIENDS = process.env.STEEM_TRANS_FRIENDS||'';
 const STEEM_TRANS_FRIENDS_AUTHOR = process.env.STEEM_TRANS_FRIENDS_AUTHOR;
 const STEEM_KEY_POSTING = process.env.STEEM_KEY_POSTING;	// STEEM_TRANS_FRIENDS_AUTHOR 포스팅키 아니면 위임자의 포스팅 키
-
 
 const DEFAULT_TAG = 'kr-friends';  // 1개만 설정 가능 - category로도 사용되기 때문
 const DEFAULT_BODY_LEN = 200;

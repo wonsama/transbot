@@ -2,24 +2,32 @@ let fn = {};
 
 /*
 * 입력받은 문자열에서 2개이상의 공백은 1개 공백으로 치환한다
+* undefined / null 에 따른 처리 추가
 * @param source 입력받은 문자열
 * @param spaceOnly 단순 스페이스 문자열만 치환할지 여부
 * @return 공백이 제거된 문자열
 */
 fn.removeSpace2 = (source, spaceOnly=false)=>{
-	if(spaceOnly){
-		return source.replace(/ +/g, ' ');
+	if(source){
+		if(spaceOnly){
+			return source.replace(/ +/g, ' ');
+		}
+		return source.replace(/\s\s+/g, ' ');	
 	}
-	return source.replace(/\s\s+/g, ' ');
+	return source;
 }
 
 /*
 * 모든 공백 줄바꿈 문자 제거
+* undefined / null 에 따른 처리 추가
 * @param source 입력받은 문자열
 * @return 공백이 제거된 문자열
 */
 fn.removeSpace = (source)=>{
-	return source.replace(/\s\s+/g, '');
+	if(source){
+		return source.replace(/\s\s+/g, '');	
+	}
+	return source;
 }
 
 /*
