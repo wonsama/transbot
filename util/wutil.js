@@ -43,15 +43,17 @@ fn.toBoolean = (source) =>{
 * @return random value 
 */
 fn.rndInt = (start, end) => {	
-	if(start==end){
-		start = 1;
-	}
+	// if(start==end){
+	// 	start = 1;
+	// }
 	if(!end){
-		return Math.ceil(Math.random() * start);
-	}else{
-		let gap = end - start;
-		return Math.round(Math.random() * gap + start);
-	}	
+		// return Math.ceil(Math.random() * start);
+    end = start;
+    start = 1;
+	}
+
+	let gap = end - start;
+	return Math.round(Math.random() * gap + start);	
 }
 
 /*

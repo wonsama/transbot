@@ -22,7 +22,7 @@
     "dateformat": "^3.0.3",
     "dotenv": "^6.0.0",
     "google-translate-api": "^2.3.0",
-    "steem": "^0.7.1",
+    "steem": "^0.7.2",
     "striptags": "^3.1.1"
   }
 }

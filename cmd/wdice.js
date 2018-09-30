@@ -111,7 +111,8 @@ fn.command = async (item) =>{
 			wlog.info({
 				author:author,
 				permlink:permlink,
-				url:`https://steemit.com/@${author}/${permlink}`
+				url:`https://steemit.com/@${author}/${permlink}`,
+				num:num
 			},'wdice_reply_wait');
 
 			// wait for 3 sec.
