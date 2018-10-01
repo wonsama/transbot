@@ -1,3 +1,7 @@
+# 1.4.0
+
+* wdstat : 주사위 통계 댓글 기능 추가됨
+
 # 1.3.4
 
 * bugfix : dateformat

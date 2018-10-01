@@ -83,6 +83,11 @@ fn.command = async (item) =>{
 		wlog.error(err, 'wdstat_error_1');
 		return Promise.reject(err);
 	}
+	if(item.author!=cur.root_author){
+		err = `wdstat is called but  between author(${item.author}) and root_author(${cur.root_author}) is difference.`;
+		wlog.error(err, 'wdstat_error_author');
+		return Promise.reject(err);
+	}
 	let author = cur.root_author;
 	let permlink = cur.root_permlink;
 
@@ -133,8 +138,20 @@ fn.command = async (item) =>{
 	console.log(textout.join('\n'));
 	console.log(`last update time : ${dateformat(new Date(), 'yyyy-mm-dd HH:MM:ss')}`);
 
+	// STEP 2 : 댓글 작성처리
+	// let wif = STEEM_TRANS_KEY_POSTING;
+	// let author = STEEM_TRANS_AUTHOR;
+	// let permlink = `${item.author}-w`;	// make permlink same way
+	let title = '';
+	let jsonMetadata = {
+		tags:['wonsama','wdice'],
+		app: STEEM_TRANS_APP,
+		format: 'markdown'
+	};
+	[err, reply] = await to(steem.broadcast.commentAsync(wif, author, permlink, STEEM_TRANS_AUTHOR, permlink+'-wdstat', title, body, jsonMetadata));
+
 	if(!err){
-		return Promise.resolve(reply);
+		return Promise.resolve(textout);
 	}
 }
 
