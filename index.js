@@ -8,6 +8,7 @@ const wlog = require('./util/wlog');							// logs
 
 const wjankenpo = require ('./cmd/wjankenpo');		// wjankenpo
 const wdice 		= require ('./cmd/wdice');				// wdice
+const wdstat 		= require ('./cmd/wdstat');				// wdstat
 const wtransdel = require ('./cmd/wtransdel');		// wtransdel
 const wtransme 	= require ('./cmd/wtransme');			// wtransdel
 const wtransup 	= require ('./cmd/wtransup');			// wtransdel
@@ -50,7 +51,8 @@ function init(){
 			// 댓글 모니터 - 당사자 본인의 댓글은 모니터링 하지 않음
 			const mon_reply = [
 				// wtransup, wtransme, wtransdel, 
-				wdice, 
+				wdice,
+				wdstat, 
 				// wjankenpo
 			];
 			for(let mon of mon_reply){

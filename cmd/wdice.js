@@ -21,8 +21,6 @@ let fn = {};
 
 fn.name = MONITOR_COMMAND;
 
-console.log();
-
 /*
 * run dice
 * @param item replies
