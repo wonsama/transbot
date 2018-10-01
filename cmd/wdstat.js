@@ -7,6 +7,8 @@ const wlog = require('../util/wlog');							// logs
 
 const steem = require('steem');											// steem api
 
+const dateformat = require('dateformat');
+
 const STEEM_TRANS_APP = process.env.STEEM_TRANS_APP?process.env.STEEM_TRANS_APP:'wtrans/v1.0.0';
 const STEEM_TRANS_AUTHOR = process.env.STEEM_TRANS_AUTHOR;
 const STEEM_TRANS_KEY_POSTING = process.env.STEEM_TRANS_KEY_POSTING;

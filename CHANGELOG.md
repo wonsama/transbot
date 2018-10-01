@@ -1,3 +1,7 @@
+# 1.3.4
+
+* bugfix : dateformat
+
 # 1.3.3
 
 * wdstat : 주사위 통계 부분 테스트 중
