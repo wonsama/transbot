@@ -111,7 +111,7 @@ fn.command = async (item) =>{
 			wlog.info({
 				url:`https://steemit.com/@${author}/${permlink}`,
 				permlink:permlink,
-				author:author,
+				author:item.author,
 				num:num
 			},'wdice_reply_wait');
 
