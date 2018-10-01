@@ -1,3 +1,7 @@
+# 1.4.3
+
+* add : wdstat subfix
+
 # 1.4.2
 
 * bugfix : body

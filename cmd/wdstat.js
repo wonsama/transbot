@@ -101,16 +101,20 @@ fn.command = async (item) =>{
 
 	res = res.filter(x=>x.author=='wdev');
 	let out = [];
+	const DICE_SUBFIX = '의 주사위 통계';
 	for(let r of res){
 		let time = new Date(r.created);
-		let num = getNum(r.body.split(' '));
-		out.push({
-			time: time.getTime(),
-			timet : dateformat(time, 'yyyy-mm-dd HH:MM:ss'),
-			num : num,
-			nump : num.toString().padStart(3, ' '),
-			author : r.parent_author
-		});
+
+		if(r.body.indexOf(DICE_SUBFIX)==-1){
+			let num = getNum(r.body.split(' '));
+			out.push({
+				time: time.getTime(),
+				timet : dateformat(time, 'yyyy-mm-dd HH:MM:ss'),
+				num : num,
+				nump : num.toString().padStart(3, ' '),
+				author : r.parent_author
+			});
+		}	
 	}
 
 	// 결과 값 정렬 처리
@@ -125,7 +129,7 @@ fn.command = async (item) =>{
 	);
 
 	let textout = [];
-	textout.push(`"${res[0].root_title}" 의 주사위 통계`);
+	textout.push(`"${res[0].root_title}" ${DICE_SUBFIX}`);
 	textout.push(``);
 	textout.push(`|rank|author|dice|time|`);
 	textout.push(`|-|-|-|-|`);
