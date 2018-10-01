@@ -1,3 +1,7 @@
+# 1.4.2
+
+* bugfix : body
+
 # 1.4.1
 
 * bugfix : wif

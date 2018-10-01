@@ -135,8 +135,9 @@ fn.command = async (item) =>{
 		no++;
 	}
 	textout.push(``);
-	console.log(textout.join('\n'));
-	console.log(`last update time : ${dateformat(new Date(), 'yyyy-mm-dd HH:MM:ss')}`);
+	textout.push(`last update time : ${dateformat(new Date(), 'yyyy-mm-dd HH:MM:ss')}`);
+	// console.log(textout.join('\n'));
+	// console.log();
 
 	// STEP 2 : 댓글 작성처리
 	// let wif = STEEM_TRANS_KEY_POSTING;
@@ -148,7 +149,7 @@ fn.command = async (item) =>{
 		app: STEEM_TRANS_APP,
 		format: 'markdown'
 	};
-	[err, reply] = await to(steem.broadcast.commentAsync(STEEM_TRANS_KEY_POSTING, author, permlink, STEEM_TRANS_AUTHOR, permlink+'-wdstat', title, body, jsonMetadata));
+	[err, reply] = await to(steem.broadcast.commentAsync(STEEM_TRANS_KEY_POSTING, author, permlink, STEEM_TRANS_AUTHOR, permlink+'-wdstat', title, textout.join('\n'), jsonMetadata));
 
 	if(!err){
 		return Promise.resolve(textout);
