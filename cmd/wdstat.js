@@ -148,7 +148,7 @@ fn.command = async (item) =>{
 		app: STEEM_TRANS_APP,
 		format: 'markdown'
 	};
-	[err, reply] = await to(steem.broadcast.commentAsync(wif, author, permlink, STEEM_TRANS_AUTHOR, permlink+'-wdstat', title, body, jsonMetadata));
+	[err, reply] = await to(steem.broadcast.commentAsync(STEEM_TRANS_KEY_POSTING, author, permlink, STEEM_TRANS_AUTHOR, permlink+'-wdstat', title, body, jsonMetadata));
 
 	if(!err){
 		return Promise.resolve(textout);
