@@ -74,13 +74,13 @@ fn.command = async (item) =>{
 		let reply;
 		let time = new Date().getTime();
 		let num = rndInt(start,end);
-		let body = `🎲주사위를 굴려 ${num} 이(가) 나왔습니다.`;
+		let body = `@${item.author}님께서 🎲주사위를 굴려 ${num} 이(가) 나왔습니다.`;
 		let voteWeight = 0;	// 10000 = 100%
 		const P100 = 10000;
 		if(start==1 && end==100){
 			if(num==7 || num==77){
 				voteWeight = P100 * 0.777;
-				body+='\n럭키넘버에 당첨되어 보너스 보팅(70%)을 받았습니다.';
+				body+='\n럭키넘버에 당첨되어 보너스 보팅(77.7%)을 받았습니다.';
 			}
 			else if(num==18){
 				voteWeight = P100 * 0.81;
@@ -109,9 +109,9 @@ fn.command = async (item) =>{
 
 		if(!err){
 			wlog.info({
-				author:author,
-				permlink:permlink,
 				url:`https://steemit.com/@${author}/${permlink}`,
+				permlink:permlink,
+				author:author,
 				num:num
 			},'wdice_reply_wait');
 
@@ -129,9 +129,9 @@ fn.command = async (item) =>{
 
 			if(!err){
 					wlog.info({
-					author:author,
-					permlink:permlink,
 					url:`https://steemit.com/@${author}/${permlink}`,
+					permlink:permlink,
+					author:author,
 					num:num
 				},'wdice_bonus_voting_wait');
 
