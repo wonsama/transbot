@@ -65,9 +65,10 @@ function init(){
 						// Perform Analysis
 						await mon.command(item[1]);	// No need to error handling
 					}	
-				}else{
-					wlog.error(JSON.stringify(items), `items.reply is undefined :: ${items.sblock} ~ ${items.eblock}`);
 				}
+				// else{
+				// 	wlog.error(JSON.stringify(items), `items.reply is undefined :: ${items.sblock} ~ ${items.eblock}`);
+				// }
 			}
 
 			// 본문 모니터
