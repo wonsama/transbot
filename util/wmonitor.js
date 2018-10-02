@@ -84,6 +84,10 @@ fn.monitor = async (type=['reply']) =>{
 						wlog.log(`--------------------------------------------------`);
 					}
 				}
+			}else{
+				// 마지막으로 읽어들인 블록 정보가 최신 블록 정보와 동일하거나 작은 경우, 일반적으로 동일한 경우임
+				blockStart = lastnumber;
+				wlog.info(`${lastnumber} block is already read block. (blockEnd : ${blockEnd}, lastnumber : ${lastnumber})`);
 			}
 
 			// 처리 결과에 읽어들인 블록 정보를 추가
