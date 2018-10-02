@@ -60,7 +60,7 @@ fn.command = async (item) =>{
 		"simmania",
 		"simmanis",
 		"merona",
-		"wonsama",
+		// "wonsama",
 	];
 	if(BANNED.includes(item.author)){
 		return Promise.reject(`author (${item.author}) is banned from wdice`);		
