@@ -59,10 +59,14 @@ function init(){
 				// do not process modified posts : data[1].body.indexOf("@@")!=0
 				let ritem = items.reply;
 				// console.log(ritem);
-				let filtered = ritem.filter(data=>data[1].body.indexOf("@@")!=0 && data[1].body.indexOf(mon.name)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
-				for(let item of filtered){
-					// Perform Analysis
-					await mon.command(item[1]);	// No need to error handling
+				if(ritem){
+					let filtered = ritem.filter(data=>data[1].body.indexOf("@@")!=0 && data[1].body.indexOf(mon.name)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
+					for(let item of filtered){
+						// Perform Analysis
+						await mon.command(item[1]);	// No need to error handling
+					}	
+				}else{
+					wlog.error(err, `items.reply is undefined :: ${items.sblock} ~ ${items.eblock}`);
 				}
 			}
 

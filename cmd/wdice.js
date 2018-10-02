@@ -53,6 +53,19 @@ fn.command = async (item) =>{
 		}
 	}
 
+	// CHECK BANNED ACCOUNT
+	const BANNED = [
+		"manimoa",
+		"sbdbackpay",
+		"simmania",
+		"simmanis",
+		"merona",
+		"wonsama",
+	];
+	if(BANNED.includes(item.author)){
+		return Promise.reject(`author (${item.author}) is banned from wdice`);		
+	}	
+
 	// STEP 1 : get information of the typed comment.
 	let range = getCommand(item.body, MONITOR_COMMAND);	// max value must be numeric
 	let start = DEFAULT_MIN;

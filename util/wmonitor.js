@@ -85,14 +85,19 @@ fn.monitor = async (type=['reply']) =>{
 					}
 				}
 			}
+
+			// 처리 결과에 읽어들인 블록 정보를 추가
+			filtered.sblock=blockStart;
+			filtered.eblock=blockEnd;
+
 		} else{
 			// search block - fail : get last block number 
-			wlog.error(err, 'getLastBlockNumer');	
+			wlog.error(err, `getLastBlockNumer :: ${blockStart} ~ ${blockEnd}`);	
 			return Promise.reject(err);
 		}
 	}catch(e){
 		// search block - occured unknown exception.
-		wlog.error(e, 'getBlocks');
+		wlog.error(e, `getBlocks :: ${blockStart} ~ ${blockEnd}`);
 		return Promise.reject(e);
 	}
 

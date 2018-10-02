@@ -1,3 +1,11 @@
+# 1.4.5
+
+* add : block read error catch at wmonitor
+
+# 1.4.4
+
+* add : ban user from hardcoding
+
 # 1.4.3
 
 * add : wdstat subfix
