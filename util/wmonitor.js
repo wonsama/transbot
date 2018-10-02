@@ -87,8 +87,8 @@ fn.monitor = async (type=['reply']) =>{
 			}
 
 			// 처리 결과에 읽어들인 블록 정보를 추가
-			filtered.sblock=blockStart;
 			filtered.eblock=blockEnd;
+			filtered.sblock=blockStart;
 
 		} else{
 			// search block - fail : get last block number 

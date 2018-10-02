@@ -66,7 +66,7 @@ function init(){
 						await mon.command(item[1]);	// No need to error handling
 					}	
 				}else{
-					wlog.error(items, `items.reply is undefined :: ${items.sblock} ~ ${items.eblock}`);
+					wlog.error(JSON.stringify(items), `items.reply is undefined :: ${items.sblock} ~ ${items.eblock}`);
 				}
 			}
 
