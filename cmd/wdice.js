@@ -57,6 +57,7 @@ fn.command = async (item) =>{
 	const BANNED = [
 		"manimoa",
 		"sbdbackpay",
+		"sbdex",
 		"simmania",
 		"simmanis",
 		"merona",
