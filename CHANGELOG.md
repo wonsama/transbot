@@ -1,3 +1,7 @@
+# 1.4.6
+
+* add : wdstat logging
+
 # 1.4.5
 
 * add : block read error catch at wmonitor

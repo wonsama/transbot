@@ -91,6 +91,13 @@ fn.command = async (item) =>{
 	let author = cur.root_author;
 	let permlink = cur.root_permlink;
 
+	// 로깅 START
+	wlog.info({
+		url:`https://steemit.com/@${author}/${permlink}`,
+		permlink:permlink,
+		author:author
+	},'wdstat_get_author_info');
+
 	// STEP 1 : 글의 전체 댓글 목록을 가져온다
 	[err, res] = await to(getRepliesFlat(author, permlink));
 	if(err){
@@ -156,6 +163,13 @@ fn.command = async (item) =>{
 	[err, reply] = await to(steem.broadcast.commentAsync(STEEM_TRANS_KEY_POSTING, author, permlink, STEEM_TRANS_AUTHOR, permlink+'-wdstat', title, textout.join('\n'), jsonMetadata));
 
 	if(!err){
+		// 로깅 START
+		wlog.info({
+			url:`https://steemit.com/@${author}/${permlink}`,
+			permlink:permlink,
+			author:author
+		},'wdstat_reply_statstics_done');
+
 		return Promise.resolve(textout);
 	}
 }
