@@ -91,15 +91,16 @@ fn.command = async (item) =>{
 		const P100 = 10000;
 		if(start==1 && end==100){
 			if(num==7 || num==77){
-				voteWeight = P100 * 0.777;
+				// 정수가 아닌 형태가 나오면 오류가 발생함. floor 처리를 통해 cut 시켜주도록 하자
+				voteWeight = Math.floor(P100 * 0.777);
 				body+='\n럭키넘버에 당첨되어 보너스 보팅(77.7%)을 받았습니다.';
 			}
 			else if(num==18){
-				voteWeight = P100 * 0.81;
+				voteWeight = Math.floor(P100 * 0.81);
 				body+='\n럭키넘버에 당첨되어 보너스 보팅(81%)을 받았습니다.';
 			}
 			else if(num==1||num==100){
-				voteWeight = P100 * 1;
+				voteWeight = Math.floor(P100 * 1);
 				body+='\n럭키넘버에 당첨되어 보너스 보팅(100%)을 받았습니다.';
 			}
 			// else{
