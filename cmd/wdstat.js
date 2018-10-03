@@ -17,7 +17,12 @@ const WAIT_FOR_REPLY = 3 * 1000;
 const DEFAULT_MIN = 1;
 const DEFAULT_MAX = 100;
 
+const DICE_SUBFIX = '의 주사위 통계';
+const TIME_FMT= 'yy.mm.dd HH:MM:ss';
+
 const MONITOR_COMMAND = STEEM_TRANS_IS_TEST?'#testdstat':'#wdstat';
+
+const SUPER_USER = 'wonsama'; // 내 글이 아니여도 wdstat 을 호출 할 수 있음
 
 let fn = {};
 
@@ -60,6 +65,32 @@ function getNum(arr){
 }
 
 /*
+* 주사위 정보를 반환한다
+* @param res 전체 정보
+* @param out 누적 추가된 정보
+* @return out 누적 추가된 정보
+*/
+function getDice(res, out=[]){
+    for(let r of res){
+        if(r.author==STEEM_TRANS_AUTHOR && !r.body.includes(DICE_SUBFIX)){
+            let d = new Date(r.created);
+            let time = d.getTime();	// utc 타임 
+            d.setHours(d.getHours() + 9);	// 한국은 +9 처리를 통해 현재 시간을 확보
+            out.push({
+                author : r.parent_author,
+                num : getNum(r.body.split(' ')),
+                time : time,
+                show : dateformat(d, TIME_FMT),
+            });
+        }
+        if(r.c){
+            getDice(r.c, out);
+        }
+    }
+    return out;
+}
+
+/*
 * run dice
 * @param item replies
 */
@@ -83,8 +114,8 @@ fn.command = async (item) =>{
 		wlog.error(err, 'wdstat_error_1');
 		return Promise.reject(err);
 	}
-	if(item.author!=cur.root_author){
-		err = `wdstat is called but  between author(${item.author}) and root_author(${cur.root_author}) is difference.`;
+	if(item.author!=SUPER_USER && item.author!=cur.root_author){
+		err = `wdstat is called but between author(${item.author}) and root_author(${cur.root_author}) is difference.`;
 		wlog.error(err, 'wdstat_error_author');
 		return Promise.reject(err);
 	}
@@ -99,51 +130,30 @@ fn.command = async (item) =>{
 	},'wdstat_get_author_info');
 
 	// STEP 1 : 글의 전체 댓글 목록을 가져온다
-	[err, res] = await to(getRepliesFlat(author, permlink));
+	[err, res] = await to(getReplies(author, permlink));
 	if(err){
 		// TODO : Consider working manually when an error occurs
 		wlog.error(err, 'wdstat_error_2');
 		return Promise.reject(err);
 	}
 
-	res = res.filter(x=>x.author=='wdev');
-	let out = [];
-	const DICE_SUBFIX = '의 주사위 통계';
-	for(let r of res){
-		let time = new Date(r.created);
-
-		if(r.body.indexOf(DICE_SUBFIX)==-1){
-			let num = getNum(r.body.split(' '));
-			out.push({
-				time: time.getTime(),
-				timet : dateformat(time, 'yyyy-mm-dd HH:MM:ss'),
-				num : num,
-				nump : num.toString().padStart(3, ' '),
-				author : r.parent_author
-			});
-		}	
-	}
-
-	// 결과 값 정렬 처리
-	out.sort((a,b)=>{
-		if(b.num==a.num){
-			// 먼저 주사위 굴린 사람 순서로 정렬
-			return a.time - b.time;
-		}
-			// 번호 큰 순서대로 정렬 
-			return b.num-a.num;
-		}
-	);
+	// 주사위 해당 정보 필터링 및 정렬 처리 
+	let output = getDice(res);
+    output.sort((a,b)=>{
+        if(a.num==b.num){
+            return a.time - b.time; 
+        }
+        return b.num - a.num;
+    })
+    output.map((c,i,a)=>c.no=i+1);
 
 	let textout = [];
 	textout.push(`"${res[0].root_title}" ${DICE_SUBFIX}`);
 	textout.push(``);
 	textout.push(`|rank|author|dice|time|`);
 	textout.push(`|-|-|-|-|`);
-	let no = 1;
 	for(let o of out){
-		textout.push(`|${no}|${o.author}|${o.num}|${o.timet}|`);
-		no++;
+		textout.push(`|${o.no}|${o.author}|${o.num}|${o.show}|`);
 	}
 	textout.push(``);
 	textout.push(`last update time : ${dateformat(new Date(), 'yyyy-mm-dd HH:MM:ss')}`);
@@ -151,12 +161,9 @@ fn.command = async (item) =>{
 	// console.log();
 
 	// STEP 2 : 댓글 작성처리
-	// let wif = STEEM_TRANS_KEY_POSTING;
-	// let author = STEEM_TRANS_AUTHOR;
-	// let permlink = `${item.author}-w`;	// make permlink same way
 	let title = '';
 	let jsonMetadata = {
-		tags:['wonsama','wdice'],
+		tags:['wonsama','wdstat'],
 		app: STEEM_TRANS_APP,
 		format: 'markdown'
 	};
