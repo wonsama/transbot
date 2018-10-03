@@ -8,11 +8,11 @@ CHECK_NAME=[t]ransbot
 RES=$(ps -ef | grep $CHECK_NAME | wc -l)
 while [ : ]
 do
-if [ "$RES" = "1" ]; then
-	echo `date` $CHECK_NAME is live
-else
+if [ "$RES" = "0" ]; then
 	echo restart $CHECK_NAME at `date`
 	nohup node $NODE_APP_PATH &
+else
+	echo `date` $CHECK_NAME is live
 fi
 sleep 10
 done
