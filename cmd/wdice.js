@@ -54,12 +54,13 @@ fn.command = async (item) =>{
 	}
 
 	// CHECK BANNED ACCOUNT
+	// manimoa, simmania, simmanis 계정 차단 해제 요청
 	const BANNED = [
-		"manimoa",
+		// "manimoa",
 		"sbdbackpay",
 		"sbdex",
-		"simmania",
-		"simmanis",
+		// "simmania",
+		// "simmanis",
 		"merona",
 		// "wonsama",
 	];
