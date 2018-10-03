@@ -5,9 +5,9 @@ NODE_APP_PATH=/home/bc/dev/transbot
 CHECK_NAME=[t]ransbot
 
 # HEART BEAT CHECK
-RES=$(ps -ef | grep $CHECK_NAME | wc -l)
 while [ : ]
 do
+RES=$(ps -ef | grep $CHECK_NAME | wc -l)
 if [ "$RES" = "0" ]; then
 	echo restart $CHECK_NAME at `date`
 	nohup node $NODE_APP_PATH &
