@@ -152,7 +152,7 @@ fn.command = async (item) =>{
 	textout.push(``);
 	textout.push(`|rank|author|dice|time|`);
 	textout.push(`|-|-|-|-|`);
-	for(let o of out){
+	for(let o of output){
 		textout.push(`|${o.no}|${o.author}|${o.num}|${o.show}|`);
 	}
 	textout.push(``);
