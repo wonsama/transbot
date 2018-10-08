@@ -57,14 +57,14 @@ fn.command = async (item) =>{
 	// manimoa, simmania, simmanis 계정 차단 해제 요청
 	const BANNED = [
 		// "manimoa",
-		"sbdbackpay",
-		"sbdex",
+		// "sbdbackpay",
+		// "sbdex",
 		// "simmania",
 		// "simmanis",
-		"merona",
+		// "merona",
 		// "wonsama",
 	];
-	if(BANNED.includes(item.author)){
+	if(BANNED.length>0 && BANNED.includes(item.author)){
 		return Promise.reject(`author (${item.author}) is banned from wdice`);		
 	}	
 
@@ -104,10 +104,10 @@ fn.command = async (item) =>{
 				voteWeight = Math.floor(P100 * 1);
 				body+='\n럭키넘버에 당첨되어 보너스 보팅(100%)을 받았습니다.';
 			}
-			// else{
-			// 	voteWeight = P100 * num / 100;
-			// 	body+=`\n럭키넘버에 당첨되어 보너스 보팅(${num}%)을 받았습니다.`;
-			// }
+			else if(num==11 || num==22 || num==33 || num==44 || num==55 || num==66 || num==77 || num==88 || num==99){
+				voteWeight = Math.floor(P100 * 0.5);
+				body+='\n럭키넘버에 당첨되어 보너스 보팅(50%)을 받았습니다.';
+			}
 		}
 
 		let wif = STEEM_TRANS_KEY_POSTING;
