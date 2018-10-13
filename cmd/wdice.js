@@ -113,9 +113,11 @@ fn.command = async (item) =>{
 
 		// 광고 추가하기
 		let op = await wsteem.getRecentComment(item.author);
-		let ads = `\n[${op.title}](https://steemit.com/${op.parent_permlink}/@${op.author}/${op.permlink}) from @${op.author}`;
-		body+=ads;
-
+		if(op){
+			let ads = `\n[${op.title}](https://steemit.com/${op.parent_permlink}/@${op.author}/${op.permlink}) from @${op.author}`;
+			body+=ads;	
+		}
+		
 		let wif = STEEM_TRANS_KEY_POSTING;
 		let author = STEEM_TRANS_AUTHOR;
 		let permlink = `${item.author}-wdice-${time}`;	// make permlink same way
