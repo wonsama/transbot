@@ -1,6 +1,6 @@
 {
   "name": "transbot",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "[transbot] steemit translation bot",
   "main": "index.js",
   "scripts": {

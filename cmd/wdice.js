@@ -6,6 +6,7 @@ const {rndInt} = require ('../util/wutil');				// get random int value
 const wlog = require('../util/wlog');							// logs
 
 const steem = require('steem');											// steem api
+const wsteem = require('../util/wsteem');
 
 const STEEM_TRANS_APP = process.env.STEEM_TRANS_APP?process.env.STEEM_TRANS_APP:'wtrans/v1.0.0';
 const STEEM_TRANS_AUTHOR = process.env.STEEM_TRANS_AUTHOR;
@@ -109,6 +110,11 @@ fn.command = async (item) =>{
 				body+='\n럭키넘버에 당첨되어 보너스 보팅(50%)을 받았습니다.';
 			}
 		}
+
+		// 광고 추가하기
+		let op = await wsteem.getRecentComment(item.author);
+		let ads = `\n@${op.author} : [${op.title}](https://steemit.com/${op.parent_permlink}/@${op.author}/${op.permlink})`;
+		body+=ads;
 
 		let wif = STEEM_TRANS_KEY_POSTING;
 		let author = STEEM_TRANS_AUTHOR;
