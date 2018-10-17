@@ -45,6 +45,9 @@ fn.command = async (item) =>{
 		url:`https://steemit.com/@${item.author}/${item.permlink}`
 	},'wdice_start');
 
+	console.log('STEEM_TRANS_AUTHOR', STEEM_TRANS_AUTHOR);
+	console.log('STEEM_TRANS_KEY_POSTING', STEEM_TRANS_KEY_POSTING);
+
 	// STEP 0 : get contents information & check is modified
 	let cur;
 	[err, cur] = await to(steem.api.getContentAsync(item.author, item.permlink));
