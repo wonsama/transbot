@@ -121,6 +121,9 @@ fn.command = async (item) =>{
 		let wif = STEEM_TRANS_KEY_POSTING;
 		let author = STEEM_TRANS_AUTHOR;
 		let permlink = `${item.author.replace(/\./gi,'')}-wdice-${time}`;	// make permlink same way, permlink에는 .이 포함되면 안됨
+
+		wlog.info("*****", wif, author, permlink);
+
 		let title = '';
 		let jsonMetadata = {
 			tags:['wonsama','wdice'],
