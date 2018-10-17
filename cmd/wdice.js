@@ -45,8 +45,6 @@ fn.command = async (item) =>{
 		url:`https://steemit.com/@${item.author}/${item.permlink}`
 	},'wdice_start');
 
-	console.log('STEEM_TRANS_AUTHOR', STEEM_TRANS_AUTHOR);
-	console.log('STEEM_TRANS_KEY_POSTING', STEEM_TRANS_KEY_POSTING);
 
 	// STEP 0 : get contents information & check is modified
 	let cur;
@@ -124,8 +122,6 @@ fn.command = async (item) =>{
 		let wif = STEEM_TRANS_KEY_POSTING;
 		let author = STEEM_TRANS_AUTHOR;
 		let permlink = `${item.author.replace(/\./gi,'')}-wdice-${time}`;	// make permlink same way, permlink에는 .이 포함되면 안됨
-
-		wlog.info({wif:wif, author:author, permlink:permlink},"TEST_LOG");
 
 		let title = '';
 		let jsonMetadata = {
