@@ -25,9 +25,6 @@ RES=$(ps -ef | grep $NAME_CHK_1 | wc -l)
 RES="$(echo -e "${RES}" | tr -d '[:space:]')"
 if [ "$RES" = "0" ]; then
     nohup node $NAME_APP_1 >/dev/null 2>&1 &
-    #echo 1-1
-else
-	#echo 1-2__"$RES"__ 
 fi
 
 sleep 10
