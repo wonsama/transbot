@@ -30,12 +30,12 @@ const ADS_LIST = [
 		author:'happyberrysboy'
 	},
 	{
-		text:'엘지그린마트 - 경기도 시흥시 정왕동 1499-6, 104호', 
-		link:'http://naver.me/FiNg2ubB', 
+		text:'나들가게 엘지 그린마트 - 경기도 시흥시 정왕동 1499-6, 104호', 
+		link:'https://m.store.naver.com/places/detail?id=13531681', 
 		author:'kgbinternational'
 	},
 	{
-		text:'[wdice] 광고주 대 모집', 
+		text:'광고주 대 모집중 ! 1스팀으로 1달간 광고를?!', 
 		link:'https://steemit.com/wdice/@wonsama/6dqbxi-wdice', 
 		author:'wonsama'
 	},
