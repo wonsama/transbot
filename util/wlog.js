@@ -16,7 +16,8 @@ const STEEM_TRANS_FOLDER_INFO = process.env.STEEM_TRANS_FOLDER_INFO?STEEM_TRANS_
 */ 
 fn.log = (msg, isShow=true) => {
   if(isShow){
-    console.log(new Date().toISOString(), msg);  
+    //console.log(new Date().toISOString(), msg);
+    console.log(`[${dateforamt(new Date(), 'yyyy-mm-dd HH:MM:ss')}]`, msg);  
   }
 }
 
@@ -42,7 +43,7 @@ fn.makeFolder = (path) =>{
         }
       }
     }catch(e){
-      console.error(new Date().toISOString(), 'make folder is fail : ', e);  
+      console.error(new Date().toISOString(), 'make folder is fail : ', e);
     }
   }
 }

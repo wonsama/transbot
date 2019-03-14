@@ -22,6 +22,48 @@ let fn = {};
 
 fn.name = MONITOR_COMMAND;
 
+let ad_idx = 0;
+const ADS_LIST = [
+	{
+		text:'안녕하세요, happyberrysboy 입니다', 
+		link:'https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmU8hwnAWm29BmczzrLHGfxPhDsUyr8VQwF8UiFdRrFgjY/%EC%83%88%20%ED%8C%8C%EC%9D%BC%202019-02-27%2017.53.44_2.jpg', 
+		author:'happyberrysboy'
+	},
+	{
+		text:'엘지그린마트 - 경기도 시흥시 정왕동 1499-6, 104호', 
+		link:'http://naver.me/FiNg2ubB', 
+		author:'kgbinternational'
+	},
+	{
+		text:'[wdice] 광고주 대 모집', 
+		link:'https://steemit.com/wdice/@wonsama/6dqbxi-wdice', 
+		author:'wonsama'
+	},
+];
+let get_ad = () => {
+	let ad = ADS_LIST[ad_idx];
+	ad_idx++;
+	if(ad_idx>=ADS_LIST.length){
+		ad_idx=0;
+	}
+	return ad;
+}
+
+
+/*
+eceived from happyberrysboy1.000 STEEM
+
+20 hours ago
+
+안녕하세요~ [happyberrysboy](/@happyberrysboy)입니다. // 링크 : https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmU8hwnAWm29BmczzrLHGfxPhDsUyr8VQwF8UiFdRrFgjY/%EC%83%88%20%ED%8C%8C%EC%9D%BC%202019-02-27%2017.53.44_2.jpg
+
+Received from kgbinternational1.000 STEEM
+
+20 hours ago
+
+엘지그린마트 경기도 시흥시 정왕동 1499-6, 104호
+*/
+
 /*
 * run dice
 * @param item replies
@@ -113,11 +155,17 @@ fn.command = async (item) =>{
 		}
 
 		// 광고 추가하기
-		let op = await wsteem.getRecentComment(item.author);
-		if(op){
-			let ads = `\n[${op.title}](https://steemit.com/${op.parent_permlink}/@${op.author}/${op.permlink}) from @${op.author}`;
-			body+=ads;	
-		}
+		// let op = await wsteem.getRecentComment(item.author);
+		// if(op){
+		// 	let ads = `\n[${op.title}](https://steemit.com/${op.parent_permlink}/@${op.author}/${op.permlink}) from @${op.author}`;
+		// 	body+=ads;
+		// }
+
+		// 광고 추가
+		let ad_now = get_ad();
+		let ads = `\n[${ad_now.text}](${ad_now.link}) from @${ad_now.author}`;
+		body+=ads;
+
 		
 		let wif = STEEM_TRANS_KEY_POSTING;
 		let author = STEEM_TRANS_AUTHOR;
