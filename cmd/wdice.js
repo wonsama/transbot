@@ -25,6 +25,11 @@ fn.name = MONITOR_COMMAND;
 let ad_idx = 0;
 const ADS_LIST = [
 	{
+		text:'뉴비들에게 관심과 격려를 ~ ', 
+		link:'https://steemit.com/created/kr-join', 
+		author:'skymin'
+	},
+	{
 		text:'안녕하세요, happyberrysboy 입니다', 
 		link:'https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmU8hwnAWm29BmczzrLHGfxPhDsUyr8VQwF8UiFdRrFgjY/%EC%83%88%20%ED%8C%8C%EC%9D%BC%202019-02-27%2017.53.44_2.jpg', 
 		author:'happyberrysboy'
