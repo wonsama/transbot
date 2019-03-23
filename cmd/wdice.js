@@ -25,6 +25,11 @@ fn.name = MONITOR_COMMAND;
 let ad_idx = 0;
 const ADS_LIST = [
 	{
+		text : "양재역 4번출구 강남베드로병원",
+		link : "http://www.goodspine.org/index.asp",
+		author : "glory7"
+	},
+	{
 		text:'뉴비들에게 관심과 격려를 ~ ', 
 		link:'https://steemit.com/created/kr-join', 
 		author:'skymin'
