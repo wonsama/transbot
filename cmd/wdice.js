@@ -25,6 +25,11 @@ fn.name = MONITOR_COMMAND;
 let ad_idx = 0;
 const ADS_LIST = [
 	{
+		text : "⚽️ 스팀잇 풋살 모임 ⚽️ 풋풋스 ⚽️",
+		link : "https://open.kakao.com/o/g5uQSHV",
+		author : "bbooaae"
+	},
+	{
 		text : "양재역 4번출구 강남베드로병원",
 		link : "http://www.goodspine.org/index.asp",
 		author : "glory7"
@@ -44,11 +49,11 @@ const ADS_LIST = [
 		link:'https://m.store.naver.com/places/detail?id=13531681', 
 		author:'kgbinternational'
 	},
-	{
-		text:'광고주 대 모집중 ! 1스팀으로 1달간 광고를?!', 
-		link:'https://steemit.com/wdice/@wonsama/6dqbxi-wdice', 
-		author:'wonsama'
-	},
+	// {
+	// 	text:'광고주 대 모집중 ! 1스팀으로 1달간 광고를?!', 
+	// 	link:'https://steemit.com/wdice/@wonsama/6dqbxi-wdice', 
+	// 	author:'wonsama'
+	// },
 ];
 let get_ad = () => {
 	let ad = ADS_LIST[ad_idx];
