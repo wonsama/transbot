@@ -22,8 +22,14 @@ let fn = {};
 
 fn.name = MONITOR_COMMAND;
 
+// 4월 스팀잇 진행중인 이벤트모음 (https://steemit.com/kr/@skymin/2019-4)
 let ad_idx = 0;
 const ADS_LIST = [
+	{
+		text:'4월 스팀잇 진행중인 이벤트모음', 
+		link:'https://steemit.com/kr/@skymin/2019-4', 
+		author:'skymin'
+	},
 	{
 		text : "⚽️ 스팀잇 풋살 모임 ⚽️ 풋풋스 ⚽️",
 		link : "https://open.kakao.com/o/g5uQSHV",
@@ -33,11 +39,6 @@ const ADS_LIST = [
 		text : "양재역 4번출구 강남베드로병원",
 		link : "http://www.goodspine.org/index.asp",
 		author : "glory7"
-	},
-	{
-		text:'뉴비들에게 관심과 격려를 ~ ', 
-		link:'https://steemit.com/created/kr-join', 
-		author:'skymin'
 	},
 	{
 		text:'안녕하세요, happyberrysboy 입니다', 
