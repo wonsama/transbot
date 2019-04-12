@@ -23,8 +23,49 @@ let fn = {};
 fn.name = MONITOR_COMMAND;
 
 // 4월 스팀잇 진행중인 이벤트모음 (https://steemit.com/kr/@skymin/2019-4)
+
+// 1. 오늘의 '아 그때 살 걸' 시세
+// 링크 : https://www.upbit.com/exchange
+
+// 2. 19-04-19, Coming Soon.
+// 링크 : goo.gl/715USD
+
+// 3. 곧 핫해질 페이지, 크로스체크 하고 가실게요~
+// 링크 : goo.gl/715USD
+
+// 4. 요즘 핫한 토큰들은 모두 여기에!
+// 링크 : https://steem-engine.com/?p=tokens
+
+// 5. 돈에 대한 개념을 깨우쳐 줄 1시간 반.
+// 링크 : https://youtu.be/1_0li7LByTM
+
 let ad_idx = 0;
 const ADS_LIST = [
+	{
+		text:'오늘의 \'아 그때 살 걸\' 시세',
+		link:'https://www.upbit.com/exchange',
+		author:'y-o-u-t-h-m-e'
+	},
+	{
+		text:'19-04-19, Coming Soon',
+		link:'https://goo.gl/715USD',
+		author:'y-o-u-t-h-m-e'
+	},
+	{
+		text:'곧 핫해질 페이지, 크로스체크 하고 가실게요~',
+		link:'https://goo.gl/715USD',
+		author:'y-o-u-t-h-m-e'
+	},
+	{
+		text:'요즘 핫한 토큰들은 모두 여기에!',
+		link:'https://steem-engine.com/?p=tokens',
+		author:'y-o-u-t-h-m-e'
+	},
+	{
+		text:'돈에 대한 개념을 깨우쳐 줄 1시간 반',
+		link:'https://youtu.be/1_0li7LByTM',
+		author:'y-o-u-t-h-m-e'
+	},
 	{
 		text:'4월 스팀잇 진행중인 이벤트모음', 
 		link:'https://steemit.com/kr/@skymin/2019-4', 
