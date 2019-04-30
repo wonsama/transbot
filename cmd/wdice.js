@@ -50,7 +50,7 @@ const ADS_LIST = [
 	},
 	{
 		text:'광고주 대 모집중 ! 1스팀으로 1달간 광고를?!', 
-		link:'https://steemit.com/wdice/@wonsama/6dqbxi-wdice', 
+		link:'https://steemit.com/wdice/@wonsama/wdice-19-5-wdice', 
 		author:'wonsama'
 	},
 ];
