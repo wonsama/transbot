@@ -23,6 +23,9 @@ let fn = {};
 fn.name = MONITOR_COMMAND;
 
 /*
+
+[SSC] 2차 세일 중! 실세계 사업과 연계할 토큰을 만나보세요. https://steemit.com/kr/@tradingideas/5wufwc-ssc-2
+
 * 11 : [명품 토큰 BNW를 채굴하는 방법](https://steemit.com/bnw/@naha/5skctw-bnw)
 * 12 : [새콤 달콤 예쁜 로맨스 소설 <사랑은 냉면처럼>](https://ridibooks.com/v2/Detail?id=645000259)
 
@@ -33,6 +36,11 @@ fn.name = MONITOR_COMMAND;
 
 let ad_idx = 0;
 const ADS_LIST = [
+	{
+		text:'[SSC] 2차 세일 중! 실세계 사업과 연계할 토큰을 만나보세요.',
+		link:'https://steemit.com/kr/@tradingideas/5wufwc-ssc-2',
+		author:'tradingideas'
+	},
 	{
 		text:'명품 토큰 BNW를 채굴하는 방법',
 		link:'https://steemit.com/bnw/@naha/5skctw-bnw',
