@@ -24,6 +24,14 @@ fn.name = MONITOR_COMMAND;
 
 /*
 
+
+인공디스크치환술로 허리업! 강남베드로병원
+척추디스크전문! 양재역 4번출구 강남베드로병원
+수술 잘하는 병원이 비수술도 잘합니다!
+믿음과 사랑이 숨쉬는 강남베드로병원
+세계적인 중풍, 척추, 관절 치료 - 강남베드로병원
+http://www.goodspine.org/index.asp
+
 [SSC] 2차 세일 중! 실세계 사업과 연계할 토큰을 만나보세요. https://steemit.com/kr/@tradingideas/5wufwc-ssc-2
 
 * 11 : [명품 토큰 BNW를 채굴하는 방법](https://steemit.com/bnw/@naha/5skctw-bnw)
@@ -36,6 +44,31 @@ fn.name = MONITOR_COMMAND;
 
 let ad_idx = 0;
 const ADS_LIST = [
+	{
+		text:'인공디스크치환술로 허리업! 강남베드로병원',
+		link:'http://www.goodspine.org/index.asp',
+		author:'glory7'
+	},
+	{
+		text:'척추디스크전문! 양재역 4번출구 강남베드로병원',
+		link:'http://www.goodspine.org/index.asp',
+		author:'glory7'
+	},
+	{
+		text:'수술 잘하는 병원이 비수술도 잘합니다!',
+		link:'http://www.goodspine.org/index.asp',
+		author:'glory7'
+	},
+	{
+		text:'믿음과 사랑이 숨쉬는 강남베드로병원',
+		link:'http://www.goodspine.org/index.asp',
+		author:'glory7'
+	},
+	{
+		text:'세계적인 중풍, 척추, 관절 치료 - 강남베드로병원',
+		link:'http://www.goodspine.org/index.asp',
+		author:'glory7'
+	},
 	{
 		text:'[SSC] 2차 세일 중! 실세계 사업과 연계할 토큰을 만나보세요.',
 		link:'https://steemit.com/kr/@tradingideas/5wufwc-ssc-2',
