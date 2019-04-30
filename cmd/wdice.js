@@ -22,80 +22,37 @@ let fn = {};
 
 fn.name = MONITOR_COMMAND;
 
-// 4월 스팀잇 진행중인 이벤트모음 (https://steemit.com/kr/@skymin/2019-4)
+/*
+* 11 : [명품 토큰 BNW를 채굴하는 방법](https://steemit.com/bnw/@naha/5skctw-bnw)
+* 12 : [새콤 달콤 예쁜 로맨스 소설 <사랑은 냉면처럼>](https://ridibooks.com/v2/Detail?id=645000259)
 
-// 1. 오늘의 '아 그때 살 걸' 시세
-// 링크 : https://www.upbit.com/exchange
+#### @skymin
 
-// 2. 19-04-19, Coming Soon.
-// 링크 : goo.gl/715USD
-
-// 3. 곧 핫해질 페이지, 크로스체크 하고 가실게요~
-// 링크 : goo.gl/715USD
-
-// 4. 요즘 핫한 토큰들은 모두 여기에!
-// 링크 : https://steem-engine.com/?p=tokens
-
-// 5. 돈에 대한 개념을 깨우쳐 줄 1시간 반.
-// 링크 : https://youtu.be/1_0li7LByTM
+* 13 : [5월 진행중인 이벤트모음](https://steemit.com/kr/@skymin/2019-5)
+*/
 
 let ad_idx = 0;
 const ADS_LIST = [
 	{
-		text:'오늘의 \'아 그때 살 걸\' 시세',
-		link:'https://www.upbit.com/exchange',
-		author:'y-o-u-t-h-m-e'
+		text:'명품 토큰 BNW를 채굴하는 방법',
+		link:'https://steemit.com/bnw/@naha/5skctw-bnw',
+		author:'naha'
 	},
 	{
-		text:'19-04-19, Coming Soon',
-		link:'https://goo.gl/715USD',
-		author:'y-o-u-t-h-m-e'
+		text:'새콤 달콤 예쁜 로맨스 소설 <사랑은 냉면처럼>',
+		link:'https://ridibooks.com/v2/Detail?id=645000259',
+		author:'naha'
 	},
 	{
-		text:'곧 핫해질 페이지, 크로스체크 하고 가실게요~',
-		link:'https://goo.gl/715USD',
-		author:'y-o-u-t-h-m-e'
-	},
-	{
-		text:'요즘 핫한 토큰들은 모두 여기에!',
-		link:'https://steem-engine.com/?p=tokens',
-		author:'y-o-u-t-h-m-e'
-	},
-	{
-		text:'돈에 대한 개념을 깨우쳐 줄 1시간 반',
-		link:'https://youtu.be/1_0li7LByTM',
-		author:'y-o-u-t-h-m-e'
-	},
-	{
-		text:'4월 스팀잇 진행중인 이벤트모음', 
-		link:'https://steemit.com/kr/@skymin/2019-4', 
+		text:'5월 진행중인 이벤트모음',
+		link:'https://steemit.com/kr/@skymin/2019-5',
 		author:'skymin'
 	},
 	{
-		text : "⚽️ 스팀잇 풋살 모임 ⚽️ 풋풋스 ⚽️",
-		link : "https://open.kakao.com/o/g5uQSHV",
-		author : "bbooaae"
+		text:'광고주 대 모집중 ! 1스팀으로 1달간 광고를?!', 
+		link:'https://steemit.com/wdice/@wonsama/6dqbxi-wdice', 
+		author:'wonsama'
 	},
-	{
-		text : "양재역 4번출구 강남베드로병원",
-		link : "http://www.goodspine.org/index.asp",
-		author : "glory7"
-	},
-	{
-		text:'안녕하세요, happyberrysboy 입니다', 
-		link:'https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmU8hwnAWm29BmczzrLHGfxPhDsUyr8VQwF8UiFdRrFgjY/%EC%83%88%20%ED%8C%8C%EC%9D%BC%202019-02-27%2017.53.44_2.jpg', 
-		author:'happyberrysboy'
-	},
-	{
-		text:'나들가게 엘지 그린마트 - 경기도 시흥시 정왕동 1499-6, 104호', 
-		link:'https://m.store.naver.com/places/detail?id=13531681', 
-		author:'kgbinternational'
-	},
-	// {
-	// 	text:'광고주 대 모집중 ! 1스팀으로 1달간 광고를?!', 
-	// 	link:'https://steemit.com/wdice/@wonsama/6dqbxi-wdice', 
-	// 	author:'wonsama'
-	// },
 ];
 let get_ad = () => {
 	let ad = ADS_LIST[ad_idx];
