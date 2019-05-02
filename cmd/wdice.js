@@ -24,6 +24,24 @@ fn.name = MONITOR_COMMAND;
 
 /*
 
+1. 오늘의 '~ 간다고 했제' 시세
+링크 : https://www.upbit.com/exchange
+
+2. YBT 토큰을 사는 가장 빠른 방법! (클릭)
+링크 : https://steem-engine.com/?p=market&t=YBT
+
+3. 고인물 말고 흐르는 물이 됩시다.
+링크 : goo.gl/715USD
+
+4. 소통도 좋지만, 음악 한 곡 듣고 가세요.
+링크 : goo.gl/715USD
+
+5. 돈에 대한 개념을 깨우쳐 줄 1시간 반.
+링크 : https://youtu.be/1_0li7LByTM
+
+YBT 토큰을 소개합니다! / https://steemit.com/kr/@y-o-u-t-h-m-e/your-brick-token-ybt
+YBT 초 간단 이해하기 / https://steemit.com/kr/@ukk/ybt
+YBT 홀더 목록 / https://wonsama.github.io/steemengine/index.html?symbol=YBT
 
 인공디스크치환술로 허리업! 강남베드로병원
 척추디스크전문! 양재역 4번출구 강남베드로병원
@@ -42,8 +60,56 @@ http://www.goodspine.org/index.asp
 * 13 : [5월 진행중인 이벤트모음](https://steemit.com/kr/@skymin/2019-5)
 */
 
+/*
+* y-o-u-t-h-m-e / (5/5)
+* ukk / (3/5)
+* glory7 (5/5)
+* tradingideas (1/1)
+* naha (2/2)
+* skymin (1/1)
+*/
 let ad_idx = 0;
 const ADS_LIST = [
+	{
+		text:'오늘의 \'~ 간다고 했제\' 시세',
+		link:'https://www.upbit.com/exchange',
+		author:'y-o-u-t-h-m-e'
+	},
+	{
+		text:'YBT 토큰을 사는 가장 빠른 방법! (클릭)',
+		link:'https://steem-engine.com/?p=market&t=YBT',
+		author:'y-o-u-t-h-m-e'
+	},
+	{
+		text:'고인물 말고 흐르는 물이 됩시다.',
+		link:'https://goo.gl/715USD',
+		author:'y-o-u-t-h-m-e'
+	},
+	{
+		text:'소통도 좋지만, 음악 한 곡 듣고 가세요.',
+		link:'https://goo.gl/715USD',
+		author:'y-o-u-t-h-m-e'
+	},
+	{
+		text:'돈에 대한 개념을 깨우쳐 줄 1시간 반.',
+		link:'https://youtu.be/1_0li7LByTM',
+		author:'y-o-u-t-h-m-e'
+	},
+	{
+		text:'YBT 토큰을 소개합니다!',
+		link:'https://steemit.com/kr/@y-o-u-t-h-m-e/your-brick-token-ybt',
+		author:'ukk'
+	},
+	{
+		text:'YBT 초 간단 이해하기',
+		link:'https://steemit.com/kr/@ukk/ybt',
+		author:'ukk'
+	},
+	{
+		text:'YBT 홀더 목록',
+		link:'https://wonsama.github.io/steemengine/index.html?symbol=YBT',
+		author:'ukk'
+	},
 	{
 		text:'인공디스크치환술로 허리업! 강남베드로병원',
 		link:'http://www.goodspine.org/index.asp',
@@ -88,12 +154,7 @@ const ADS_LIST = [
 		text:'5월 진행중인 이벤트모음',
 		link:'https://steemit.com/kr/@skymin/2019-5',
 		author:'skymin'
-	},
-	{
-		text:'광고주 대 모집중 ! 1스팀으로 1달간 광고를?!', 
-		link:'https://steemit.com/wdice/@wonsama/wdice-19-5-wdice', 
-		author:'wonsama'
-	},
+	}
 ];
 let get_ad = () => {
 	let ad = ADS_LIST[ad_idx];
