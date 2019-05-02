@@ -45,7 +45,7 @@ const _get_url = (memo)=>{
 
 	memo = memo.replace(/\s/gi, '');
 	let url = memo.split('/').reverse();
-	if(url.length<6){
+	if(!url || url.length<3){
 		return undefined;
 	}
 
