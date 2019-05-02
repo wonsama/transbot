@@ -6,17 +6,18 @@ const {monitor} = require ('./util/wmonitor');		// monitoring
 const {toBoolean} = require ('./util/wutil');			// is true ?
 const wlog = require('./util/wlog');							// logs
 
-const wjankenpo = require ('./cmd/wjankenpo');		// wjankenpo
+// const wjankenpo = require ('./cmd/wjankenpo');		// wjankenpo
 const wdice 		= require ('./cmd/wdice');				// wdice
 const wdstat 		= require ('./cmd/wdstat');				// wdstat
-const wtransdel = require ('./cmd/wtransdel');		// wtransdel
-const wtransme 	= require ('./cmd/wtransme');			// wtransdel
-const wtransup 	= require ('./cmd/wtransup');			// wtransdel
+// const wtransdel = require ('./cmd/wtransdel');		// wtransdel
+// const wtransme 	= require ('./cmd/wtransme');			// wtransdel
+// const wtransup 	= require ('./cmd/wtransup');			// wtransdel
+const wtrain = require('./cmd/wtrain');
 
-const wvotetrain 	= require ('./cmd/wvotetrain');	// wvotetrain
+// const wvotetrain 	= require ('./cmd/wvotetrain');	// wvotetrain
 
-const wfriends 	= require ('./cmd/wfriends');			// wfriends
-const wvips 	= require ('./cmd/wvips');			// wvips
+// const wfriends 	= require ('./cmd/wfriends');			// wfriends
+// const wvips 	= require ('./cmd/wvips');			// wvips
 
 const STEEM_AUTHOR = process.env.STEEM_AUTHOR;
 const STEEM_TRANS_AUTHOR = process.env.STEEM_TRANS_AUTHOR;
@@ -35,6 +36,7 @@ function init(){
 		'reply', 
 		// 'vote',
 		// 'content'
+		'transfer', 
 		]
 	)
 
@@ -62,6 +64,26 @@ function init(){
 				if(ritem){
 					let filtered = ritem.filter(data=>data[1].body.indexOf("@@")!=0 && data[1].body.indexOf(mon.name)>=0 && data[1].author!=STEEM_TRANS_AUTHOR);
 					for(let item of filtered){
+						// Perform Analysis
+						await mon.command(item[1]);	// No need to error handling
+					}	
+				}
+			}
+
+			const mon_transfer = [
+				wtrain
+			];
+			for(let mon of mon_transfer){
+				// do not process modified posts : data[1].body.indexOf("@@")!=0
+				let ritem = items.transfer;
+				// console.log(ritem);
+				if(ritem){
+
+					// const id_to = ritem[1].to;
+					// const amount = parseFloat(ritem[1].amount.split(' ')[0]);
+					
+					// let filtered = ritem.filter(data=>id_to=='wdev' && amount>0.001);
+					for(let item of ritem){
 						// Perform Analysis
 						await mon.command(item[1]);	// No need to error handling
 					}	
