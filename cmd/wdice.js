@@ -71,6 +71,11 @@ http://www.goodspine.org/index.asp
 let ad_idx = 0;
 const ADS_LIST = [
 	{
+		text:'@ayogom 4월 증인 보고서',
+		link:'https://steemit.com/kr/@ayogom/2019-4-witness-report-7-and-steem-analysis',
+		author:'ayogom'
+	},
+	{
 		text:'오늘의 \'~ 간다고 했제\' 시세',
 		link:'https://www.upbit.com/exchange',
 		author:'y-o-u-t-h-m-e'

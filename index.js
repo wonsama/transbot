@@ -6,17 +6,19 @@ const {monitor} = require ('./util/wmonitor');		// monitoring
 const {toBoolean} = require ('./util/wutil');			// is true ?
 const wlog = require('./util/wlog');							// logs
 
-const wjankenpo = require ('./cmd/wjankenpo');		// wjankenpo
+// const wjankenpo = require ('./cmd/wjankenpo');		// wjankenpo
 const wdice 		= require ('./cmd/wdice');				// wdice
 const wdstat 		= require ('./cmd/wdstat');				// wdstat
-const wtransdel = require ('./cmd/wtransdel');		// wtransdel
-const wtransme 	= require ('./cmd/wtransme');			// wtransdel
-const wtransup 	= require ('./cmd/wtransup');			// wtransdel
+// const wtransdel = require ('./cmd/wtransdel');		// wtransdel
+// const wtransme 	= require ('./cmd/wtransme');			// wtransdel
+// const wtransup 	= require ('./cmd/wtransup');			// wtransdel
 
-const wvotetrain 	= require ('./cmd/wvotetrain');	// wvotetrain
+// const wvotetrain 	= require ('./cmd/wvotetrain');	// wvotetrain
 
-const wfriends 	= require ('./cmd/wfriends');			// wfriends
-const wvips 	= require ('./cmd/wvips');			// wvips
+// const wfriends 	= require ('./cmd/wfriends');			// wfriends
+// const wvips 	= require ('./cmd/wvips');			// wvips
+
+const wtrain = require('./cmd/wtrain');
 
 const STEEM_AUTHOR = process.env.STEEM_AUTHOR;
 const STEEM_TRANS_AUTHOR = process.env.STEEM_TRANS_AUTHOR;
@@ -35,6 +37,7 @@ function init(){
 		'reply', 
 		// 'vote',
 		// 'content'
+		'transfer'
 		]
 	)
 
@@ -70,6 +73,27 @@ function init(){
 				// 	wlog.error(JSON.stringify(items), `items.reply is undefined :: ${items.sblock} ~ ${items.eblock}`);
 				// }
 			}
+
+			const mon_transfer = [
+				wtrain
+			];
+			for(let mon of mon_transfer){
+				// do not process modified posts : data[1].body.indexOf("@@")!=0
+				let ritem = items.transfer;
+				// console.log(ritem);
+				if(ritem){
+
+					// const id_to = ritem[1].to;
+					// const amount = parseFloat(ritem[1].amount.split(' ')[0]);
+					
+					// let filtered = ritem.filter(data=>id_to=='wdev' && amount>0.001);
+					for(let item of ritem){
+						// Perform Analysis
+						await mon.command(item[1]);	// No need to error handling
+					}	
+				}
+			}
+
 
 			// 본문 모니터
 			// wfriends : 등록한 친구 새글 알림 (1일 1포스트 - 댓글로 친구의 새글 정보 기록)
@@ -120,3 +144,12 @@ function init(){
 }
 init();
 wlog.info(`start program as ${STEEM_TRANS_IS_TEST?'test mode':'production mode'}`);
+
+
+/*
+{ from: 'kryptogames',
+      to: 'cryptoeater',
+      amount: '210.638 STEEM',
+      memo:
+       'You Won 210.638 STEEM. Bet Details:- Prediction: Under 95, Result: 37, Client Seed: e6849f7f1b8f1, Server Seed Hash: 68eb3ecbf33c1973620abe4b59d0d6d6b5fda7d1c3d2a56fb7259763ca450a55' }
+*/

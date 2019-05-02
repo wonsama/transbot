@@ -192,6 +192,8 @@ fn.filterVotes = operations=>{
 	return operations[0]=='vote';
 }
 
+
+fn.filterTransfer = operations=>operations[0]=='transfer';
 /*	
 	증인용 
 

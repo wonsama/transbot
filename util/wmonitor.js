@@ -77,6 +77,12 @@ fn.monitor = async (type=['reply']) =>{
 							wlog.log(`[ ${blockStart} ~ ${blockEnd} ( block : ${blockEnd - blockStart +1}, vote : ${f_vote.length} ) ]`);	
 						}
 
+						if(type.includes('transfer')){
+							let f_transfer = operations.filter(wblock.filterTransfer);
+							filtered.transfer = f_transfer;
+							wlog.log(`[ ${blockStart} ~ ${blockEnd} ( block : ${blockEnd - blockStart +1}, transfer : ${f_transfer.length} ) ]`);	
+						}
+
 						lastnumber = blockEnd;
 
 						// print read block number range
