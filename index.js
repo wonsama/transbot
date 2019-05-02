@@ -145,6 +145,9 @@ function init(){
 init();
 wlog.info(`start program as ${STEEM_TRANS_IS_TEST?'test mode':'production mode'}`);
 
+const TRAIN_IDS = (process.env.TRAIN_IDS||'').split(',').map(x=>x.replace(/\s/gi,''));
+wlog.info(`TRAIN_IDS : ${TRAIN_IDS.join(',')}`);
+
 
 /*
 { from: 'kryptogames',
