@@ -49,15 +49,15 @@ const _get_url = (memo)=>{
 		return undefined;
 	}
 
-	let permlink = url[0];
-	let author = url[1];
-
-	if(author.indexOf("@")!=0){
+	if(url[1].indexOf("@")<0){
 		return undefined;
 	}
 
+	let permlink = url[0];
+	let author = url[1].split('@')[1];	// 댓글 같은 경우는 또 다른 것이 포함되는 경우가 있음
+	
 	return {
-		author : author.replace("@", ''),
+		author : author,
 		permlink : permlink
 	};
 }
