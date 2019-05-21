@@ -9,6 +9,7 @@ const wlog = require('./util/wlog');							// logs
 // const wjankenpo = require ('./cmd/wjankenpo');		// wjankenpo
 const wdice 		= require ('./cmd/wdice');				// wdice
 const wdstat 		= require ('./cmd/wdstat');				// wdstat
+const wcome 		= require ('./cmd/wcome');				// wdstat
 // const wtransdel = require ('./cmd/wtransdel');		// wtransdel
 // const wtransme 	= require ('./cmd/wtransme');			// wtransdel
 // const wtransup 	= require ('./cmd/wtransup');			// wtransdel
@@ -55,6 +56,7 @@ function init(){
 				// wtransup, wtransme, wtransdel, 
 				wdice,
 				wdstat, 
+				wcome,
 				// wjankenpo
 			];
 			for(let mon of mon_reply){
