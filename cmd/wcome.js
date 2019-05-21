@@ -91,7 +91,7 @@ fn.command = async (item) =>{
 			return x;
 		}
 		return undefined;
-	}).filter(x=>x).filter(x=>x.author!=author);	// 작성자 대댓글은 제외
+	}).filter(x=>x).filter(x=>x.author!=author && STEEM_TRANS_AUTHOR!=author);	// 작성자 대댓글은 제외, wdev
 
 	let textout = [];
 	textout.push(`"${res[0].root_title}" (선착순 댓글 모음)`);
