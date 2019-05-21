@@ -105,7 +105,7 @@ fn.command = async (item) =>{
 		if(body.length>20){
 			body = `${body.substring(0,20)}...`;
 		}
-		textout.push(`|${idx}|${r.author}|${body)}|${df}|`);
+		textout.push(`|${idx}|${r.author}|${body}|${df}|`);
 		idx++;
 	}
 	textout.push(``);
