@@ -72,3 +72,5 @@ last_launched.txt
 nohup.out
 multivote.js
 multiadd.js
+voting_list.json
+voting_time.json
