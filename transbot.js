@@ -41,10 +41,10 @@ function init(){
 	// monitor(['reply', 'vote', 'content'])
 	monitor(
 		[
-		// 'reply', 
+		'reply', 
 		// 'vote',
-		'content'
-		// 'transfer', 
+		'content',
+		'transfer' 
 		]
 	)
 
