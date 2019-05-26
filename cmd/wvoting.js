@@ -28,7 +28,7 @@ const TIME_HOUR_20 = TIME_HOUR * 20;
 const WHITE_LIST = [
 	"lucky2", "knight4sky", "anpigon", "happyberrysboy", "jayplayco", 
 	"fenrir78", "tradingideas", "jinuking", "newbijohn", "y-o-u-t-h-m-e", "goodhello",
-	"hyokhyok", "ioioioioi", "ryanhkr", "jacobyu", "wonsama"
+	"hyokhyok", "ioioioioi", "ryanhkr", "jacobyu", "wonsama", "ukk"
 ];
 
 ////////////////////////////////////////////////////////////
@@ -115,7 +115,7 @@ command = async (item) =>{
 
 		let list = wfile.read(PATH_VOTING_LIST);
 		list.push(data);
-		
+
 		wfile.write(PATH_VOTING_LIST, JSON.stringify(list) );
 	}
 }
