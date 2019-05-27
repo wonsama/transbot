@@ -113,7 +113,7 @@ command = async (item) =>{
 			time : new Date().getTime() // TODO : 컨텐츠 정보 가져와서 시간으로 변형, headblock 아니여서 음 ...
 		};
 
-		let list = wfile.read(PATH_VOTING_LIST);
+		let list = JSON.parse(wfile.read(PATH_VOTING_LIST));
 		list.push(data);
 
 		wfile.write(PATH_VOTING_LIST, JSON.stringify(list) );
