@@ -165,7 +165,7 @@ async function timeCheck(){
 		// console.log('has upvoting', 'remain sec', (time + MIN_15 - now) / 1000 );
 		// console.log(STEEM_VOTING, STEEM_VOTING_POSTING, first.author, first.permlink);
 
-		if( time + MIN_15 < now ){
+		if( time + MIN_15 > now ){
 			
 			// 첫번째 글에 대한 보팅을 수행한다 
 			// await steem.broadcast.sendAsync(
