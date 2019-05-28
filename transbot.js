@@ -153,6 +153,9 @@ async function timeCheck(){
 
 	let vt = JSON.parse(wfile.read(PATH_VOTING_TIME));
 	let list = JSON.parse(wfile.read(PATH_VOTING_LIST));
+
+
+
 	if(list.length>=1){
 		let first = list.slice(0,1)[0];
 		let reamin = list.slice(1);
@@ -165,7 +168,7 @@ async function timeCheck(){
 		// console.log('has upvoting', 'remain sec', (time + MIN_15 - now) / 1000 );
 		// console.log(STEEM_VOTING, STEEM_VOTING_POSTING, first.author, first.permlink);
 
-		if( time + MIN_15 > now ){
+		if( time + MIN_15 < now ){
 			
 			// 첫번째 글에 대한 보팅을 수행한다 
 			// await steem.broadcast.sendAsync(
@@ -185,6 +188,8 @@ async function timeCheck(){
 			// );
 
 			await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, 10000);
+
+			wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink}`);
 
 			vt[first.author] = new Date().getTime();				// 보팅 시간 업데이트 처리
 			wfile.write(PATH_VOTING_TIME, JSON.stringify(vt));		// 최종 보팅시간 업데이트

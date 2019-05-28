@@ -81,7 +81,7 @@ const _is_voted = (author) => {
 
 	if(va){
 		if(va.time + TIME_HOUR_20 < new Date().getTime() ){
-			return false;
+			return false;	// TIME_HOUR_20 초과
 		}else{
 			return true;
 		}
@@ -115,6 +115,8 @@ command = async (item) =>{
 
 		let list = JSON.parse(wfile.read(PATH_VOTING_LIST));
 		list.push(data);
+
+		wlog.info(`added list ::: https://steemit.com/@${data.author}/${data.permlink}`);
 
 		wfile.write(PATH_VOTING_LIST, JSON.stringify(list) );
 	}
