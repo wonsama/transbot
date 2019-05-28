@@ -187,10 +187,15 @@ async function timeCheck(){
 			// 	{ posting: STEEM_VOTING_POSTING }
 			// );
 
-			await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, 10000);
-
-			wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink}`);
-
+			try{
+				await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, 10000);
+				wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink}`);
+			}catch(e){
+				// 일반적으로 이미 보팅한 경우나 네트워크 오류인 경우임 , 이런 경우는 안타깝지만 PASS 
+				// 구분도 가능하나 귀차니즘
+				wlog.info(`auto voted fail ::: https://steemit.com/@${first.author}/${first.permlink}`);
+			}
+			
 			vt[first.author] = new Date().getTime();				// 보팅 시간 업데이트 처리
 			wfile.write(PATH_VOTING_TIME, JSON.stringify(vt));		// 최종 보팅시간 업데이트
 			wfile.write(PATH_VOTING_LIST, JSON.stringify(reamin));	// 보팅 대기열에서 제거처리
