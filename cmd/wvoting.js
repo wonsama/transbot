@@ -17,6 +17,7 @@
 
 const steem = require('steem');											// steem api
 const wfile = require('../util/wfile');									// file util
+const wlog = require('../util/wlog');									// logs
 
 const PATH_VOTING_TIME = './voting_time.json';
 const PATH_VOTING_LIST = './voting_list.json';
@@ -29,7 +30,7 @@ const WHITE_10000 = [
 	"lucky2", "knight4sky", "happyberrysboy", "jayplayco", 
 	"fenrir78", "tradingideas", "jinuking", "newbijohn", "y-o-u-t-h-m-e", "goodhello",
 	"hyokhyok", "ioioioioi", "ryanhkr", "wonsama", "ukk","jayplay.cur",
-	
+
 	"anpigon", "gfriend96", "jacobyu",
 ];
 const WHITE_5000 = [
