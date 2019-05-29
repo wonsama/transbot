@@ -188,7 +188,8 @@ async function timeCheck(){
 			// );
 
 			try{
-				await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, 10000);
+				let weight = first.weight?first.weight:10000;
+				await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, weight);
 				wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink}`);
 			}catch(e){
 				// 일반적으로 이미 보팅한 경우나 네트워크 오류인 경우임 , 이런 경우는 안타깝지만 PASS 

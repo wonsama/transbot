@@ -22,13 +22,29 @@ const PATH_VOTING_TIME = './voting_time.json';
 const PATH_VOTING_LIST = './voting_list.json';
 
 const TIME_HOUR = 1000 * 60 * 60;
-const TIME_HOUR_20 = TIME_HOUR * 20;
+const TIME_VOTING_HOUR = TIME_HOUR * 20;
 
 // 보팅 대상 아이디
-const WHITE_LIST = [
-	"lucky2", "knight4sky", "anpigon", "happyberrysboy", "jayplayco", 
+const WHITE_10000 = [
+	"lucky2", "knight4sky", "happyberrysboy", "jayplayco", 
 	"fenrir78", "tradingideas", "jinuking", "newbijohn", "y-o-u-t-h-m-e", "goodhello",
-	"hyokhyok", "ioioioioi", "ryanhkr", "jacobyu", "wonsama", "ukk"
+	"hyokhyok", "ioioioioi", "ryanhkr", "wonsama", "ukk","jayplay.cur",
+	
+	"anpigon", "gfriend96", "jacobyu",
+];
+const WHITE_5000 = [
+	"autoway","ayogom","banguri","bji1203","blockchainstudio","dmsqlc0303",
+	"donekim", "hodolbak", "jsquare","kibumh","morning","stylegold","sweetpapa",
+	"zzing", "zzings"
+];
+
+const WHITE_2000 = [
+	"codingman","feelsogood","innovit","isaaclab","koyuh8","luckystrikes","naha",
+	"realmankwon","snuff12","sonki999","yoon",
+];
+
+const WHITE_1000 = [
+	"clayop","cyberrn","noisysky","twinbraid","tworld",
 ];
 
 ////////////////////////////////////////////////////////////
@@ -80,14 +96,30 @@ const _is_voted = (author) => {
 	let va = json[author];
 
 	if(va){
-		if(va.time + TIME_HOUR_20 < new Date().getTime() ){
-			return false;	// TIME_HOUR_20 초과
+		if(author=='wonsama' || va.time + TIME_VOTING_HOUR < new Date().getTime() ){
+			return false;	// TIME_VOTING_HOUR 초과
 		}else{
 			return true;
 		}
 	}
 	return false;
-}	
+}
+
+// 보팅 가중치를 기록
+const _get_weight = (author) =>{
+
+	if(WHITE_10000.includes(author)){
+		return 10000;
+	}else if(WHITE_5000.includes(author)){
+		return 5000;
+	}else if(WHITE_2000.includes(author)){
+		return 2000;
+	}else if(WHITE_1000.includes(author)){
+		return 1000;
+	}
+
+	return 1000;
+}
 
 ////////////////////////////////////////////////////////////
 //
@@ -105,12 +137,17 @@ command = async (item) =>{
 	let author = item.author;
 
 	// 태그 포함 여부 확인
-	if( tags && tags.includes('sct') && WHITE_LIST.includes(author) && !_is_voted(author) && !_is_listup(author) ){
+	if( tags && tags.includes('sct') && 
+		( 
+			WHITE_10000.includes(author) || WHITE_5000.includes(author) || WHITE_2000.includes(author) || WHITE_1000.includes(author)
+		) 
+		&& !_is_voted(author) && !_is_listup(author) ){
 
 		let data = {
 			permlink : permlink, 
 			author : author,
-			time : new Date().getTime() // TODO : 컨텐츠 정보 가져와서 시간으로 변형, headblock 아니여서 음 ...
+			time : new Date().getTime(), // TODO : 컨텐츠 정보 가져와서 시간으로 변형, headblock 아니여서 음 ...
+			weight : _get_weight(author)
 		};
 
 		let list = JSON.parse(wfile.read(PATH_VOTING_LIST));
