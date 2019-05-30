@@ -29,17 +29,18 @@ const TIME_VOTING_HOUR = TIME_HOUR * 20;
 const WHITE_10000 = [
 	"lucky2", "knight4sky", "happyberrysboy", "jayplayco", 
 	"fenrir78", "tradingideas", "jinuking", "newbijohn", "y-o-u-t-h-m-e", "goodhello",
-	"hyokhyok", "ioioioioi", "ryanhkr", "wonsama", "ukk","jayplay.cur",
+	"hyokhyok", "ioioioioi", "ryanhkr", "wonsama", "ukk",
 
 	"anpigon", "gfriend96", "jacobyu",
 ];
 const WHITE_5000 = [
-	"autoway","ayogom","banguri","bji1203","blockchainstudio","dmsqlc0303",
-	"donekim", "hodolbak", "jsquare","kibumh","morning","stylegold","sweetpapa",
-	"zzing", "zzings"
+	
 ];
 
 const WHITE_2000 = [
+	"jayplay.cur","autoway","ayogom","banguri","bji1203","blockchainstudio","dmsqlc0303",
+	"donekim", "hodolbak", "jsquare","kibumh","morning","stylegold","sweetpapa",
+	"zzing", "zzings",
 	"codingman","feelsogood","innovit","isaaclab","koyuh8","luckystrikes","naha",
 	"realmankwon","snuff12","sonki999","yoon",
 ];
