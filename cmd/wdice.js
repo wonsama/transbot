@@ -58,6 +58,73 @@ ayogom x 1
 */
 let ad_idx = 0;
 const ADS_LIST = [
+	
+	{
+		text:'nTOPAZ 소개 및 간단한 퀴즈 ( $1 보상 )',
+		link:'https://steemit.com/ntopaz/@joeypark/ntopaz-usd1-25',
+		author:'joeypark'
+	},
+
+	{
+		text:'nTOPAZ 스팀잇 계정 팔로우 ( $1 보상 )',
+		link:'https://steemit.com/ntopaz/@joeypark/3zhdko-ntopaz-usd1-25',
+		author:'joeypark'
+	},
+
+	{
+		text:'nTOPAZ 생태계에 참여하기 ② ( $ ? 보상 )',
+		link:'https://steemit.com/ntopaz/@joeypark/ntopaz-usd5-25',
+		author:'joeypark'
+	},
+
+	{
+		text:'오늘의 \'~ 간다고 했제\' 시세',
+		link:'https://www.upbit.com/exchange',
+		author:'y-o-u-t-h-m-e'
+	},
+
+	{
+		text:'YBT 토큰을 사는 가장 빠른 방법! (클릭)',
+		link:'https://steem-engine.com/?p=market&t=YBT',
+		author:'y-o-u-t-h-m-e'
+	},
+
+	{
+		text:'고인물 말고 흐르는 물이 됩시다.',
+		link:'https://goo.gl/715USD',
+		author:'y-o-u-t-h-m-e'
+	},
+
+	{
+		text:'소통도 좋지만, 음악 한 곡 듣고 가세요.',
+		link:'https://goo.gl/715USD',
+		author:'y-o-u-t-h-m-e'
+	},
+
+	{
+		text:'돈에 대한 개념을 깨우쳐 줄 1시간 반.',
+		link:'https://youtu.be/1_0li7LByTM',
+		author:'y-o-u-t-h-m-e'
+	},
+
+	{
+		text:'YBT 토큰을 소개합니다!',
+		link:'https://steemit.com/kr/@y-o-u-t-h-m-e/your-brick-token-ybt',
+		author:'ukk'
+	},
+
+	{
+		text:'YBT 초 간단 이해하기',
+		link:'https://steemit.com/kr/@ukk/ybt',
+		author:'ukk'
+	},
+
+	{
+		text:'YBT 홀더 목록',
+		link:'https://wonsama.github.io/steemengine/index.html?symbol=YBT',
+		author:'ukk'
+	},
+
 	{
 		text:'[SSC] 판매 중! 실세계 사업과 연계할 토큰을 만나보세요',
 		link:'https://steemit.com/kr/@tradingideas/5wufwc-ssc-2',
