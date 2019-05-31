@@ -24,40 +24,28 @@ fn.name = MONITOR_COMMAND;
 
 /*
 
-1. 오늘의 '~ 간다고 했제' 시세
-링크 : https://www.upbit.com/exchange
+glory7 x 10 * 3
+	N/A
+y-o-u-t-h-m-e x 10 * 3
+	N/A
+naha x 5
+	[스팀코인판 핵인싸 나하의 새 글 보러 가실게요~~](https://www.steemcoinpan.com/@naha)
+	[명품 토큰 BNW 새 소식 보러 가실게요~~](https://www.steemcoinpan.com/@naha)
 
-2. YBT 토큰을 사는 가장 빠른 방법! (클릭)
-링크 : https://steem-engine.com/?p=market&t=YBT
+	[스팀잇 천재 소설가 나하의 새 글 보러 가실게요~~](https://steemit.com/@naha)
+	[코린이가 1글 1스테이크냠냠 하는 비결](https://steemit.com/sct/@naha/5bzslf-or)
+	[스팀코인판에서 1글 1스테이크냠냠 하는 비결, 나하가 알려줄게요~~](https://steemit.com/sct/@naha/5bzslf-or)
+	
+	
+tradingideas x 1
+	[SSC 판매 중! 실세계 사업과 연계할 토큰을 만나보세요](https://steemit.com/kr/@tradingideas/5wufwc-ssc-2)
+skymin x 1
+	[6월진행중인이벤트모음](https://steemit.com/sct/@skymin/2019-6)
+bewarecenterbase x 1
+	[300 코인 지원 Atomic 지갑](https://steemit.com/sct/@bewarecenterbase/-300-atomic-wallet-airdrop-promo-code-102nr4-1559056135981)
+ayogom x 1
+	N/A
 
-3. 고인물 말고 흐르는 물이 됩시다.
-링크 : goo.gl/715USD
-
-4. 소통도 좋지만, 음악 한 곡 듣고 가세요.
-링크 : goo.gl/715USD
-
-5. 돈에 대한 개념을 깨우쳐 줄 1시간 반.
-링크 : https://youtu.be/1_0li7LByTM
-
-YBT 토큰을 소개합니다! / https://steemit.com/kr/@y-o-u-t-h-m-e/your-brick-token-ybt
-YBT 초 간단 이해하기 / https://steemit.com/kr/@ukk/ybt
-YBT 홀더 목록 / https://wonsama.github.io/steemengine/index.html?symbol=YBT
-
-인공디스크치환술로 허리업! 강남베드로병원
-척추디스크전문! 양재역 4번출구 강남베드로병원
-수술 잘하는 병원이 비수술도 잘합니다!
-믿음과 사랑이 숨쉬는 강남베드로병원
-세계적인 중풍, 척추, 관절 치료 - 강남베드로병원
-http://www.goodspine.org/index.asp
-
-[SSC] 2차 세일 중! 실세계 사업과 연계할 토큰을 만나보세요. https://steemit.com/kr/@tradingideas/5wufwc-ssc-2
-
-* 11 : [명품 토큰 BNW를 채굴하는 방법](https://steemit.com/bnw/@naha/5skctw-bnw)
-* 12 : [새콤 달콤 예쁜 로맨스 소설 <사랑은 냉면처럼>](https://ridibooks.com/v2/Detail?id=645000259)
-
-#### @skymin
-
-* 13 : [5월 진행중인 이벤트모음](https://steemit.com/kr/@skymin/2019-5)
 */
 
 /*
@@ -71,52 +59,22 @@ http://www.goodspine.org/index.asp
 let ad_idx = 0;
 const ADS_LIST = [
 	{
-		text:'@ayogom 4월 증인 보고서',
-		link:'https://steemit.com/kr/@ayogom/2019-4-witness-report-7-and-steem-analysis',
-		author:'ayogom'
+		text:'[SSC] 판매 중! 실세계 사업과 연계할 토큰을 만나보세요',
+		link:'https://steemit.com/kr/@tradingideas/5wufwc-ssc-2',
+		author:'tradingideas'
 	},
 	{
-		text:'오늘의 \'~ 간다고 했제\' 시세',
-		link:'https://www.upbit.com/exchange',
-		author:'y-o-u-t-h-m-e'
-	},
-	{
-		text:'YBT 토큰을 사는 가장 빠른 방법! (클릭)',
-		link:'https://steem-engine.com/?p=market&t=YBT',
-		author:'y-o-u-t-h-m-e'
-	},
-	{
-		text:'고인물 말고 흐르는 물이 됩시다.',
-		link:'https://goo.gl/715USD',
-		author:'y-o-u-t-h-m-e'
-	},
-	{
-		text:'소통도 좋지만, 음악 한 곡 듣고 가세요.',
-		link:'https://goo.gl/715USD',
-		author:'y-o-u-t-h-m-e'
-	},
-	{
-		text:'돈에 대한 개념을 깨우쳐 줄 1시간 반.',
-		link:'https://youtu.be/1_0li7LByTM',
-		author:'y-o-u-t-h-m-e'
-	},
-	{
-		text:'YBT 토큰을 소개합니다!',
-		link:'https://steemit.com/kr/@y-o-u-t-h-m-e/your-brick-token-ybt',
-		author:'ukk'
-	},
-	{
-		text:'YBT 초 간단 이해하기',
-		link:'https://steemit.com/kr/@ukk/ybt',
-		author:'ukk'
-	},
-	{
-		text:'YBT 홀더 목록',
-		link:'https://wonsama.github.io/steemengine/index.html?symbol=YBT',
-		author:'ukk'
+		text:'따뜻한 치유 진정한 쾌유! 척추 정형 전문 강남 베드로병원',
+		link:'http://www.goodspine.org/index.asp',
+		author:'glory7'
 	},
 	{
 		text:'인공디스크치환술로 허리업! 강남베드로병원',
+		link:'http://www.goodspine.org/index.asp',
+		author:'glory7'
+	},
+	{
+		text:'따뜻한 치유 진정한 쾌유! 척추 정형 전문 강남 베드로병원',
 		link:'http://www.goodspine.org/index.asp',
 		author:'glory7'
 	},
@@ -126,7 +84,17 @@ const ADS_LIST = [
 		author:'glory7'
 	},
 	{
+		text:'따뜻한 치유 진정한 쾌유! 척추 정형 전문 강남 베드로병원',
+		link:'http://www.goodspine.org/index.asp',
+		author:'glory7'
+	},
+	{
 		text:'수술 잘하는 병원이 비수술도 잘합니다!',
+		link:'http://www.goodspine.org/index.asp',
+		author:'glory7'
+	},
+	{
+		text:'따뜻한 치유 진정한 쾌유! 척추 정형 전문 강남 베드로병원',
 		link:'http://www.goodspine.org/index.asp',
 		author:'glory7'
 	},
@@ -136,29 +104,49 @@ const ADS_LIST = [
 		author:'glory7'
 	},
 	{
-		text:'세계적인 중풍, 척추, 관절 치료 - 강남베드로병원',
+		text:'따뜻한 치유 진정한 쾌유! 척추 정형 전문 강남 베드로병원',
 		link:'http://www.goodspine.org/index.asp',
 		author:'glory7'
 	},
 	{
-		text:'[SSC] 2차 세일 중! 실세계 사업과 연계할 토큰을 만나보세요.',
-		link:'https://steemit.com/kr/@tradingideas/5wufwc-ssc-2',
-		author:'tradingideas'
+		text:'세계적인 중풍, 척추, 관절 치료 - 강남베드로병원',
+		link:'http://www.goodspine.org/index.asp',
+		author:'glory7'
+	},	
+	{
+		text:'300 코인 지원 Atomic 지갑',
+		link:'https://steemit.com/sct/@bewarecenterbase/-300-atomic-wallet-airdrop-promo-code-102nr4-1559056135981',
+		author:'bewarecenterbase'
 	},
 	{
-		text:'명품 토큰 BNW를 채굴하는 방법',
-		link:'https://steemit.com/bnw/@naha/5skctw-bnw',
-		author:'naha'
-	},
-	{
-		text:'새콤 달콤 예쁜 로맨스 소설 <사랑은 냉면처럼>',
-		link:'https://ridibooks.com/v2/Detail?id=645000259',
-		author:'naha'
-	},
-	{
-		text:'5월 진행중인 이벤트모음',
-		link:'https://steemit.com/kr/@skymin/2019-5',
+		text:'6월 진행중인 이벤트 모음',
+		link:'https://steemit.com/sct/@skymin/2019-6',
 		author:'skymin'
+	},
+	{
+		text:'스팀코인판 핵인싸 나하의 새 글 보러 가실게요~~',
+		link:'https://www.steemcoinpan.com/@naha',
+		author:'naha'
+	},
+	{
+		text:'명품 토큰 BNW 새 소식 보러 가실게요~~',
+		link:'https://www.steemcoinpan.com/@naha',
+		author:'naha'
+	},
+	{
+		text:'스팀잇 천재 소설가 나하의 새 글 보러 가실게요~~',
+		link:'https://steemit.com/@naha',
+		author:'naha'
+	},
+	{
+		text:'코린이가 1글 1스테이크냠냠 하는 비결',
+		link:'https://steemit.com/sct/@naha/5bzslf-or',
+		author:'naha'
+	},
+	{
+		text:'스팀코인판에서 1글 1스테이크냠냠 하는 비결, 나하가 알려줄게요~~',
+		link:'https://steemit.com/sct/@naha/5bzslf-or',
+		author:'naha'
 	}
 ];
 let get_ad = () => {
