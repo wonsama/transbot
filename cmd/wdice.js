@@ -58,7 +58,11 @@ ayogom x 1
 */
 let ad_idx = 0;
 const ADS_LIST = [
-	
+	{
+		text:'5월 증인보고서',
+		link:'https://steemit.com/sct/@ayogom/2019-5-witness-report-8-and-steem-analysis',
+		author:'ayogom'
+	},
 	{
 		text:'nTOPAZ 소개 및 간단한 퀴즈 ( $1 보상 )',
 		link:'https://steemit.com/ntopaz/@joeypark/ntopaz-usd1-25',
