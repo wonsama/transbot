@@ -49,6 +49,8 @@ const WHITE_1000 = [
 	"clayop","cyberrn","noisysky","twinbraid","tworld",
 ];
 
+const TRAIN_IDS = (process.env.TRAIN_IDS||'').split(',').map(x=>x.replace(/\s/gi,''));
+
 ////////////////////////////////////////////////////////////
 //
 // const (상수정의)
@@ -152,6 +154,15 @@ command = async (item) =>{
 			weight : _get_weight(author)
 		};
 
+		// 보팅 트레인 수행
+		if( WHITE_10000.includes(author) ){
+			for(let t of TRAIN_IDS){
+				let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_${t}`];
+				let _weight = 10000;
+				steem.broadcast.voteAsync(_wif, t, author, permlink, _weight);
+			}
+		}
+		
 		let list = JSON.parse(wfile.read(PATH_VOTING_LIST));
 		list.push(data);
 
