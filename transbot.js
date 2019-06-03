@@ -31,6 +31,9 @@ const STEEM_TRANS_IS_TEST = toBoolean(process.env.STEEM_TRANS_IS_TEST);
 const STEEM_VOTING = 'wonsama';
 const STEEM_VOTING_POSTING = process.env[`ENV_AUTHOR_KEY_POSTING_${STEEM_VOTING}`];
 
+const TRAIN_IDS = (process.env.TRAIN_IDS||'').split(',').map(x=>x.replace(/\s/gi,''));
+
+
 /*
 * entry point
 */
@@ -188,9 +191,19 @@ async function timeCheck(){
 			// );
 
 			try{
-				let weight = first.weight?first.weight:10000;
+				let weight = first.weight?first.weight:1000;
 				await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, weight);
-				wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink}`);
+				wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink} with ${weight/100} %`);
+
+				// 개때 보팅
+				if(weight==10000){
+					for(let t of TRAIN_IDS){
+						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_${t}`];
+						let _weight = 10000;
+						steem.broadcast.voteAsync(_wif, t, author, permlink, _weight);
+					}
+				}
+
 			}catch(e){
 				// 일반적으로 이미 보팅한 경우나 네트워크 오류인 경우임 , 이런 경우는 안타깝지만 PASS 
 				// 구분도 가능하나 귀차니즘

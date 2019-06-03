@@ -3,6 +3,9 @@
 // information (소개)
 //
 
+// 설정 정보를 읽어들인다 
+require('dotenv').config();
+
 /*
    소개정보
 */
@@ -49,7 +52,8 @@ const WHITE_1000 = [
 	"clayop","cyberrn","noisysky","twinbraid","tworld",
 ];
 
-const TRAIN_IDS = (process.env.TRAIN_IDS||'').split(',').map(x=>x.replace(/\s/gi,''));
+const _VOTE_ON = process.env.VOTE_ON;
+const VOTE_ON = _VOTE_ON?(_VOTE_ON.toLowerCase()=="true"?true:false):false;
 
 ////////////////////////////////////////////////////////////
 //
@@ -140,6 +144,15 @@ command = async (item) =>{
 	let permlink = item.permlink;
 	let author = item.author;
 
+	// 개때 보팅 트레인 수행
+	// if( tags && WHITE_10000.includes(author) && !_is_voted(author) && !_is_listup(author) ){
+	// 	for(let t of TRAIN_IDS){
+	// 		let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_${t}`];
+	// 		let _weight = 10000;
+	// 		steem.broadcast.voteAsync(_wif, t, author, permlink, _weight);
+	// 	}
+	// }
+
 	// 태그 포함 여부 확인
 	if( tags && tags.includes('sct') && 
 		( 
@@ -153,19 +166,13 @@ command = async (item) =>{
 			time : new Date().getTime(), // TODO : 컨텐츠 정보 가져와서 시간으로 변형, headblock 아니여서 음 ...
 			weight : _get_weight(author)
 		};
-
-		// 보팅 트레인 수행
-		if( WHITE_10000.includes(author) ){
-			for(let t of TRAIN_IDS){
-				let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_${t}`];
-				let _weight = 10000;
-				steem.broadcast.voteAsync(_wif, t, author, permlink, _weight);
-			}
-		}
 		
 		let list = JSON.parse(wfile.read(PATH_VOTING_LIST));
-		list.push(data);
-
+		// 보팅 가능 상태일 경우 
+		if(VOTE_ON || author=='wonsama'){
+			list.push(data);	
+		}
+		
 		wlog.info(`added list ::: https://steemit.com/@${data.author}/${data.permlink}`);
 
 		wfile.write(PATH_VOTING_LIST, JSON.stringify(list) );
