@@ -21,9 +21,11 @@ require('dotenv').config();
 const steem = require('steem');											// steem api
 const wfile = require('../util/wfile');									// file util
 const wlog = require('../util/wlog');									// logs
+const os = require("os");
 
-const PATH_VOTING_TIME = './voting_time.json';
-const PATH_VOTING_LIST = './voting_list.json';
+const HOST_NAME = os.hostname();
+const PATH_VOTING_TIME = HOST_NAME=='jwserver'?'/home/jwsnt/dev/transbot/voting_time.json':'./voting_time.json';
+const PATH_VOTING_LIST = HOST_NAME=='jwserver'?'/home/jwsnt/dev/transbot/voting_list.json':'./voting_list.json';
 
 const TIME_HOUR = 1000 * 60 * 60;
 const TIME_VOTING_HOUR = TIME_HOUR * 20;
@@ -154,7 +156,7 @@ command = async (item) =>{
 	// }
 
 	// 태그 포함 여부 확인
-	if( tags && tags.includes('sct') && 
+	if( tags && tags[0]=='sct' && 
 		( 
 			WHITE_10000.includes(author) || WHITE_5000.includes(author) || WHITE_2000.includes(author) || WHITE_1000.includes(author)
 		) 

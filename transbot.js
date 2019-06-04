@@ -196,12 +196,14 @@ async function timeCheck(){
 				wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink} with ${weight/100} %`);
 
 				// 개때 보팅
-				if(weight==10000){
+				if(weight>=10000){
+					wlog.info('dogs run');
 					for(let t of TRAIN_IDS){
 						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_${t}`];
-						let _weight = 10000;
-						steem.broadcast.voteAsync(_wif, t, author, permlink, _weight);
+						steem.broadcast.voteAsync(_wif, t, author, permlink, weight);
 					}
+				}else{
+					wlog.info(`dogs run fail weight is ${weight}`);
 				}
 
 			}catch(e){

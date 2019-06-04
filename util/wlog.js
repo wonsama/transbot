@@ -61,12 +61,12 @@ fn.info = (json, type='')=>{
   const filePath = `${STEEM_TRANS_FOLDER_INFO}/${fileName}`;
   let data = {};
 
-  data.time = now.toISOString();
+  data.time = dateformat(new Date(),'yyyy-mm-dd HH:MM:ss');
   data.type = type;
   data.json = json;
 
   if(!json){
-    console.error(new Date().toISOString(), '[wlog info] error : input json empty');
+    console.error(dateformat(new Date(),'yyyy-mm-dd HH:MM:ss'), '[wlog info] error : input json empty');
     return false;
   }
 
@@ -78,15 +78,15 @@ fn.info = (json, type='')=>{
     fs.appendFile( filePath, JSON.stringify(data) + '\n', FILE_CHARSET_UTF8, (err)=>{
       if(err){
         // file write error 
-        console.error(new Date().toISOString(), '[wlog info] write error : ', err);
+        console.error(dateformat(new Date(),'yyyy-mm-dd HH:MM:ss'), '[wlog info] write error : ', err);
       }else{
 
         // print info script
-        console.log(new Date().toISOString(), JSON.stringify(data) );
+        console.log(dateformat(new Date(),'yyyy-mm-dd HH:MM:ss'), JSON.stringify(data) );
       }
     } );
   }catch(e){
-    console.error(new Date().toISOString(), '[wlog info] unknown error : ', e);
+    console.error(dateformat(new Date(),'yyyy-mm-dd HH:MM:ss'), '[wlog info] unknown error : ', e);
   } 
 }
 
@@ -103,7 +103,7 @@ fn.error = (json, type='')=>{
   const filePath = `${STEEM_TRANS_FOLDER_ERR}/${fileName}`;
   let data = {};
 
-  data.time = now.toISOString();
+  data.time = dateformat(new Date(),'yyyy-mm-dd HH:MM:ss');
   data.type = type;
   data.json = json;
   data.jsonString = json.toString();
@@ -112,7 +112,7 @@ fn.error = (json, type='')=>{
   // }
 
   if(!json){
-    console.error(new Date().toISOString(), '[wlog error] error : input json empty');
+    console.error(dateformat(new Date(),'yyyy-mm-dd HH:MM:ss'), '[wlog error] error : input json empty');
     return false;
   }
 
@@ -125,15 +125,15 @@ fn.error = (json, type='')=>{
       if(err){
 
         // file write error 
-        console.error(new Date().toISOString(), '[wlog error] write error : ', err);
+        console.error(dateformat(new Date(),'yyyy-mm-dd HH:MM:ss'), '[wlog error] write error : ', err);
       }else{
 
         // print error script
-        console.error(new Date().toISOString(), JSON.stringify(data) );
+        console.error(dateformat(new Date(),'yyyy-mm-dd HH:MM:ss'), JSON.stringify(data) );
       }
     } );
   }catch(e){
-    console.error(new Date().toISOString(), '[wlog error] unknown error : ', e);
+    console.error(dateformat(new Date(),'yyyy-mm-dd HH:MM:ss'), '[wlog error] unknown error : ', e);
   } 
 }
 
