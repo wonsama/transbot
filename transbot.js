@@ -197,7 +197,7 @@ async function timeCheck(){
 
 				// 개때 보팅
 				if(weight>=10000){
-					wlog.info('dogs run');
+					wlog.info(`dogs run : ${TRAIN_IDS[0]} ~ ${TRAIN_IDS[TRAIN_IDS.length-1]} ::: ${TRAIN_IDS}`);
 					for(let t of TRAIN_IDS){
 						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_${t}`];
 						steem.broadcast.voteAsync(_wif, t, author, permlink, weight);
