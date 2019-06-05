@@ -200,7 +200,7 @@ async function timeCheck(){
 					wlog.info(`dogs run : ${TRAIN_IDS[0]} ~ ${TRAIN_IDS[TRAIN_IDS.length-1]} ::: ${TRAIN_IDS}`);
 					for(let t of TRAIN_IDS){
 						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_${t}`];
-						steem.broadcast.voteAsync(_wif, t, author, permlink, weight);
+						steem.broadcast.voteAsync(_wif, t, first.author, first.permlink, weight);
 					}
 				}else{
 					wlog.info(`dogs run fail weight is ${weight}`);
