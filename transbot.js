@@ -195,6 +195,18 @@ async function timeCheck(){
 				await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, weight);
 				wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink} with ${weight/100} %`);
 
+				// scot 보팅
+				if(first.tags){
+					if(first.tags.includes('aaa')){
+						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_wonsama.aaa`];
+						steem.broadcast.voteAsync(_wif, 'wonsama.aaa', first.author, first.permlink, weight);
+					}
+					if(first.tags.includes('sct')){
+						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_wonsama.sct`];
+						steem.broadcast.voteAsync(_wif, 'wonsama.sct', first.author, first.permlink, weight);
+					}
+				}
+
 				// 개때 보팅
 				if(weight>=10000){
 					wlog.info(`dogs run : ${TRAIN_IDS[0]} ~ ${TRAIN_IDS[TRAIN_IDS.length-1]} ::: ${TRAIN_IDS}`);

@@ -39,14 +39,14 @@ const WHITE_10000 = [
 	"anpigon", "gfriend96", "jacobyu",
 ];
 const WHITE_5000 = [
-	
+	"naha","jayplay.cur",
 ];
 
 const WHITE_2000 = [
-	"jayplay.cur","autoway","ayogom","banguri","bji1203","blockchainstudio","dmsqlc0303",
+	"autoway","ayogom","banguri","bji1203","blockchainstudio","dmsqlc0303",
 	"donekim", "hodolbak", "jsquare","kibumh","morning","stylegold","sweetpapa",
 	"zzing", "zzings",
-	"codingman","feelsogood","innovit","isaaclab","koyuh8","luckystrikes","naha",
+	"codingman","feelsogood","innovit","isaaclab","koyuh8","luckystrikes",
 	"realmankwon","snuff12","sonki999","yoon",
 ];
 
@@ -156,7 +156,7 @@ command = async (item) =>{
 	// }
 
 	// 태그 포함 여부 확인
-	if( tags && tags[0]=='sct' && 
+	if( tags && 
 		( 
 			WHITE_10000.includes(author) || WHITE_5000.includes(author) || WHITE_2000.includes(author) || WHITE_1000.includes(author)
 		) 
@@ -166,7 +166,8 @@ command = async (item) =>{
 			permlink : permlink, 
 			author : author,
 			time : new Date().getTime(), // TODO : 컨텐츠 정보 가져와서 시간으로 변형, headblock 아니여서 음 ...
-			weight : _get_weight(author)
+			weight : _get_weight(author),
+			tags : tags.map(x=>x.toLowerCase())
 		};
 		
 		let list = JSON.parse(wfile.read(PATH_VOTING_LIST));
