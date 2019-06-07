@@ -33,6 +33,20 @@ const STEEM_VOTING_POSTING = process.env[`ENV_AUTHOR_KEY_POSTING_${STEEM_VOTING}
 
 const TRAIN_IDS = (process.env.TRAIN_IDS||'').split(',').map(x=>x.replace(/\s/gi,''));
 
+// 해당 계정의 보팅 파워를 계산해 준다
+let get_vp = async (author)=>{
+    return steem.api.getAccountsAsync([author])
+    .then(res=>{
+
+        let x = res[0];
+
+        let vp = x.voting_power; //최근 투표일 기준 보팅파워 
+        let tgap = (new Date - new Date(x.last_vote_time + "Z")) / 1000; // 시간흐름 적용 
+        let vpc = parseFloat(Math.min(100,(vp + (10000 * tgap / 432000))/100).toFixed(2));    // 현재 기준 보팅파워
+
+        return Promise.resolve(vpc);
+    });    
+}
 
 /*
 * entry point
@@ -192,9 +206,15 @@ async function timeCheck(){
 
 			try{
 				let weight = first.weight?first.weight:1000;
-				await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, weight);
-				wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink} with ${weight/100} %`);
+				let vp = await get_vp(STEEM_VOTING);
 
+				if(vp>90 || first.author.indexOf('wonsama')>=0){
+					await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, weight);
+					wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink} with ${weight/100} %`);	
+				}else{
+					wlog.info(`auto voted fail (vp : ${vp}) ::: https://steemit.com/@${first.author}/${first.permlink} with ${weight/100} %`);	
+				}
+				
 				// scot 보팅
 				if(first.tags){
 					if(first.tags.includes('aaa')){

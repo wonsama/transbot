@@ -106,7 +106,7 @@ const _is_voted = (author) => {
 	let va = json[author];
 
 	if(va){
-		if(author=='wonsama' || va.time + TIME_VOTING_HOUR < new Date().getTime() ){
+		if(author.indexOf('wonsama')>=0 || va.time + TIME_VOTING_HOUR < new Date().getTime() ){
 			return false;	// TIME_VOTING_HOUR 초과
 		}else{
 			return true;
@@ -172,7 +172,7 @@ command = async (item) =>{
 		
 		let list = JSON.parse(wfile.read(PATH_VOTING_LIST));
 		// 보팅 가능 상태일 경우 
-		if(VOTE_ON || author=='wonsama'){
+		if(VOTE_ON || author.indexOf('wonsama')>=0){
 			list.push(data);	
 		}
 		
