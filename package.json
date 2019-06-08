@@ -17,11 +17,12 @@
   },
   "homepage": "https://github.com/wonsama/transbot#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.2",
     "dateformat": "^3.0.3",
     "dotenv": "^6.0.0",
     "google-translate-api": "^2.3.0",
+    "request": "^2.88.0",
     "steem": "^0.7.2",
     "striptags": "^3.1.1"
   }

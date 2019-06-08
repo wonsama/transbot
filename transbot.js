@@ -14,6 +14,7 @@ const wdice 		= require ('./cmd/wdice');				// wdice
 const wdstat 		= require ('./cmd/wdstat');				// wdstat
 const wcome 		= require ('./cmd/wcome');				// wdstat
 const wvoting 		= require ('./cmd/wvoting');				// wvoting
+const wtag 			= require ('./cmd/wtag');				// wtag
 // const wtransdel = require ('./cmd/wtransdel');		// wtransdel
 // const wtransme 	= require ('./cmd/wtransme');			// wtransdel
 // const wtransup 	= require ('./cmd/wtransup');			// wtransdel
@@ -79,7 +80,8 @@ function init(){
 			const mon_reply = [
 				wdice,
 				wdstat, 
-				wcome
+				wcome,
+				wtag
 			];
 			for(let mon of mon_reply){
 				// do not process modified posts : data[1].body.indexOf("@@")!=0
