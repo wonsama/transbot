@@ -25,7 +25,7 @@ let fn = {};
 fn.name = MONITOR_COMMAND;
 
 // 태그 기준 최신글 10개를 가져온다
-const get_tag_top10 = (tag) =>{
+const get_tag_top10 = (tag, item) =>{
 	const method = "tags_api.get_discussions_by_created";
 	const params = {
 		tag : tag,
@@ -36,6 +36,8 @@ const get_tag_top10 = (tag) =>{
 	.then(res=>{
 		let out = [];
 		let idx = 1;
+		let ori_link = `https://steemd.com/whan/@${STEEM_TRANS_AUTHOR}/${item.permlink}-wtag`;
+
 		out.push(`<strong>${params.tag.toUpperCase()}</strong> 태그 최신글  10 개`);
 		out.push(`<code>작성시간 : ${dateformat(new Date(), 'yyyy.mm.dd HH:MM:ss')}</code>`);//<div class='pull-right'></div>
 		out.push(``);
@@ -47,8 +49,7 @@ const get_tag_top10 = (tag) =>{
 			idx++;
 		}
 		out.push(``);
-		out.push(`<center><a href="/@whan.dev ">WHAN DEVTEAM</a> | <a href='/@wonsama/wtag-useage-kr'>#wtag 사용방법</a><br/><sub>이 글이 좋았다면 ? 업보팅 !</sub></center>`);
-
+		out.push(`<center><a href="/@whan.dev ">WHAN DEVTEAM</a> | <a href='/@wonsama/wtag-useage-kr'>#wtag 사용법</a> | <a href='${ori_link}'>markdown</a><br/><sub>이 글이 좋았다면 ? 업보팅 !</sub></center>`);
 		return out.join('\r\n');
 	})
 }
@@ -73,7 +74,7 @@ fn.command = async (item) =>{
 		},'wtag_reply_fail');
 		return Promise.resolve('fail');
 	}
-	let message = await get_tag_top10(tag);
+	let message = await get_tag_top10(tag, item);
 
 	// STEP 2 : 댓글 작성처리
 	let title = '';
