@@ -74,3 +74,6 @@ multivote.js
 multiadd.js
 voting_list.json
 voting_time.json
+
+package.json
+package-lock.json
