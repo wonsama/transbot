@@ -63,11 +63,15 @@ fn.command = async (item) =>{
 	let author = item.author;
 	let permlink = item.permlink;
 	let tag = getCommand(item.body, MONITOR_COMMAND).replace(/\s/,'');
-	let _tags = tag.split(',');
-	let limit = _tags.length>1?parseInt(_tags[1]):10;
-	if(limit>100){
-		limit = 100;
-	}
+	let limit = 10;
+
+
+	wlog.info({
+			url:`https://steemit.com/@${author}/${permlink}`,
+			permlink:permlink,
+			author:author,
+			command:tag
+		},'wtag_detected');
 
 	if(!tag || tag==''){
 		// 로깅 - 호출한 사람의 정보를 기록
@@ -78,6 +82,15 @@ fn.command = async (item) =>{
 			message:'tag is empty'
 		},'wtag_reply_fail');
 		return Promise.resolve('fail');
+	}else{
+		let _tags = tag.split(',');
+		tag = _tags[0];
+		limit = _tags.length>1?parseInt(_tags[1]):10;
+		if(isNaN(limit)){
+			limit = 10;
+		}else if(limit>100){
+			limit = 100;
+		}
 	}
 	let message = await get_tag_top10(tag, item, limit);
 
