@@ -93,9 +93,9 @@ fn.command = async (item) =>{
 		}
 	}
 	let message = await get_tag_top10(tag, item, limit);
-	wlog.info({
-			message:message
-		},'message');
+	// wlog.info({
+	// 		message:message
+	// 	},'message');
 
 	// STEP 2 : 댓글 작성처리
 	let title = '';
@@ -105,10 +105,10 @@ fn.command = async (item) =>{
 		format: 'markdown'
 	};
 	[err, reply] = await to(steem.broadcast.commentAsync(STEEM_TRANS_KEY_POSTING, author, permlink, STEEM_TRANS_AUTHOR, permlink+'-wtag', title, message, jsonMetadata));
-	wlog.info({
-			reply:reply,
-			err:err
-		},'reply');
+	// wlog.info({
+	// 		reply:reply,
+	// 		err:err
+	// 	},'reply');
 
 	if(!err){
 		// 로깅 - 호출한 사람의 정보를 기록
