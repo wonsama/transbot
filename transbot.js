@@ -210,6 +210,8 @@ async function timeCheck(){
 				let weight = first.weight?first.weight:1000;
 				let vp = await get_vp(STEEM_VOTING);
 
+				wlog.info(`current vp : ${vp}`)
+
 				if(vp>90 || first.author.indexOf('wonsama')>=0){
 					await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, weight);
 					wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink} with ${weight/100} %`);	
