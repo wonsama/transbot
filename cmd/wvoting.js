@@ -34,7 +34,7 @@ const TIME_VOTING_HOUR = TIME_HOUR * 20;
 const WHITE_10000 = [
 	"lucky2", "knight4sky", "happyberrysboy", "jayplayco", 
 	"fenrir78", "tradingideas", "jinuking", "newbijohn", "y-o-u-t-h-m-e", "goodhello",
-	"hyokhyok", "ioioioioi", "ryanhkr", "wonsama", "ukk",
+	"hyokhyok", "ioioioioi", "ryanhkr", "wonsama", "ukk", 'wonsama.aaa','wonsama.sct'
 
 	"anpigon", "gfriend96", "jacobyu",
 ];

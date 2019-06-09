@@ -24,12 +24,12 @@ let fn = {};
 
 fn.name = MONITOR_COMMAND;
 
-// 태그 기준 최신글 10개를 가져온다
-const get_tag_top10 = (tag, item) =>{
+// 태그 기준 최신글 limit 개를 가져온다
+const get_tag_top10 = (tag, item, limit=10) =>{
 	const method = "tags_api.get_discussions_by_created";
 	const params = {
 		tag : tag,
-		limit : 10,
+		limit : limit,
 		truncate_body : 0
 	}
 	return wrpc.send_rpc(method, params)
@@ -38,7 +38,7 @@ const get_tag_top10 = (tag, item) =>{
 		let idx = 1;
 		let ori_link = `https://steemd.com/whan/@${STEEM_TRANS_AUTHOR}/${item.permlink}-wtag`;
 
-		out.push(`<strong>${params.tag.toUpperCase()}</strong> 태그 최신글  10 개`);
+		out.push(`<strong>${params.tag.toUpperCase()}</strong> 태그 최신글  ${limit} 개`);
 		out.push(`<code>작성시간 : ${dateformat(new Date(), 'yyyy.mm.dd HH:MM:ss')}</code>`);//<div class='pull-right'></div>
 		out.push(``);
 		out.push(`|A|T|`);
@@ -63,6 +63,11 @@ fn.command = async (item) =>{
 	let author = item.author;
 	let permlink = item.permlink;
 	let tag = getCommand(item.body, MONITOR_COMMAND).replace(/\s/,'');
+	let _tags = tag.split(',');
+	let limit = _tags.length>1?parseInt(_tags[1]):10;
+	if(limit>100){
+		limit = 100;
+	}
 
 	if(!tag || tag==''){
 		// 로깅 - 호출한 사람의 정보를 기록
@@ -74,12 +79,12 @@ fn.command = async (item) =>{
 		},'wtag_reply_fail');
 		return Promise.resolve('fail');
 	}
-	let message = await get_tag_top10(tag, item);
+	let message = await get_tag_top10(tag, item, limit);
 
 	// STEP 2 : 댓글 작성처리
 	let title = '';
 	let jsonMetadata = {
-		tags:['wonsama','wtag','sct','aaa'],
+		tags:['wonsama','wtag','sct','aaa','spt'],
 		app: STEEM_TRANS_APP,
 		format: 'markdown'
 	};
