@@ -106,9 +106,10 @@ fn.command = async (item) =>{
 	};
 	[err, reply] = await to(steem.broadcast.commentAsync(STEEM_TRANS_KEY_POSTING, author, permlink, STEEM_TRANS_AUTHOR, permlink+'-wtag', title, message, jsonMetadata));
 	wlog.info({
-			reply:reply
+			reply:reply,
+			err:err
 		},'reply');
-	
+
 	if(!err){
 		// 로깅 - 호출한 사람의 정보를 기록
 		wlog.info({
