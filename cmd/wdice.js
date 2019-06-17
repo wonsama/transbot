@@ -129,11 +129,11 @@ const ADS_LIST = [
 		author:'ukk'
 	},
 
-	{
-		text:'[SSC] 판매 중! 실세계 사업과 연계할 토큰을 만나보세요',
-		link:'https://steemit.com/kr/@tradingideas/5wufwc-ssc-2',
-		author:'tradingideas'
-	},
+	// {
+	// 	text:'[SSC] 판매 중! 실세계 사업과 연계할 토큰을 만나보세요',
+	// 	link:'https://steemit.com/kr/@tradingideas/5wufwc-ssc-2',
+	// 	author:'tradingideas'
+	// },
 	{
 		text:'따뜻한 치유 진정한 쾌유! 척추 정형 전문 강남 베드로병원',
 		link:'http://www.goodspine.org/index.asp',
