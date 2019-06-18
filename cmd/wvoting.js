@@ -39,15 +39,16 @@ const WHITE_10000 = [
 	"anpigon", "gfriend96", "jacobyu",
 ];
 const WHITE_5000 = [
-	"naha","jayplay.cur",
+	"naha","jayplay.cur",'glory7',
+	'sonki999','oldstone','virus707','zzings'
 ];
 
 const WHITE_2000 = [
 	"autoway","ayogom","banguri","bji1203","blockchainstudio","dmsqlc0303",
 	"donekim", "hodolbak", "jsquare","kibumh","morning","stylegold","sweetpapa",
-	"zzing", "zzings",
+	"zzing",
 	"codingman","feelsogood","innovit","isaaclab","koyuh8","luckystrikes",
-	"realmankwon","snuff12","sonki999","yoon",
+	"realmankwon","snuff12","yoon",
 ];
 
 const WHITE_1000 = [
