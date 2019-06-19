@@ -216,30 +216,38 @@ async function timeCheck(){
 					await steem.broadcast.voteAsync(STEEM_VOTING_POSTING, STEEM_VOTING, first.author, first.permlink, weight);
 					wlog.info(`auto voted ::: https://steemit.com/@${first.author}/${first.permlink} with ${weight/100} %`);	
 				}else{
-					wlog.info(`auto voted fail (vp : ${vp}) ::: https://steemit.com/@${first.author}/${first.permlink} with ${weight/100} %`);	
+					wlog.info(`auto voted fail ( ${STEEM_VOTING}'s vp : ${vp}) ::: https://steemit.com/@${first.author}/${first.permlink} with ${weight/100} %`);	
 				}
 				
 				// scot 보팅
 				if(first.tags){
-					if(first.tags.includes('aaa')){
-						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_wonsama.aaa`];
-						steem.broadcast.voteAsync(_wif, 'wonsama.aaa', first.author, first.permlink, weight);
+					const SCOT_AAA = 'wonsama.aaa';
+					let vp_aaa = await get_vp(SCOT_AAA);
+					if(vp_aaa > 80 && first.tags.includes('aaa')){
+						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_${SCOT_AAA}`];
+						steem.broadcast.voteAsync(_wif, SCOT_AAA, first.author, first.permlink, weight);
 					}
-					if(first.tags.includes('sct')){
-						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_wonsama.sct`];
-						steem.broadcast.voteAsync(_wif, 'wonsama.sct', first.author, first.permlink, weight);
+
+					const SCOT_SCT = 'wonsama.sct';
+					let vp_sct = await get_vp(SCOT_SCT);
+					if(vp_sct > 80 && first.tags.includes('sct')){
+						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_${SCOT_SCT}`];
+						steem.broadcast.voteAsync(_wif, SCOT_SCT, first.author, first.permlink, weight);
 					}
+
+					wlog.info(`vp_aaa : ${vp_aaa} / vp_sct : ${vp_sct}`);
 				}
 
 				// 개때 보팅
-				if(weight>=10000){
+				const vp_doc = await get_vp('smseller');
+				if(vp_doc > 80 && weight>=10000){
 					wlog.info(`dogs run : ${TRAIN_IDS[0]} ~ ${TRAIN_IDS[TRAIN_IDS.length-1]} ::: ${TRAIN_IDS}`);
 					for(let t of TRAIN_IDS){
 						let _wif = process.env[`ENV_AUTHOR_KEY_POSTING_${t}`];
 						steem.broadcast.voteAsync(_wif, t, first.author, first.permlink, weight);
 					}
 				}else{
-					wlog.info(`dogs run fail weight is ${weight}`);
+					wlog.info(`dogs run fail weight is ${weight} // vp_doc ${vp_doc}`);
 				}
 
 			}catch(e){
