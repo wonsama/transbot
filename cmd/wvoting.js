@@ -38,17 +38,23 @@ const WHITE_10000 = [
 
 	"anpigon", "gfriend96", "jacobyu",
 ];
+
+// 랭커 
 const WHITE_5000 = [
 	"naha","jayplay.cur",'glory7',
-	'sonki999','oldstone','virus707','zzings'
+	'sonki999','oldstone','virus707','zzings',
+
+	'kiwifi','pepsi81','yoon','aaronhong','ramengirl','snuff12',
+	"hodolbak", "hodolbak.aaa", 'viance','hanwoo.aaa','realprince',
+	"donekim",
 ];
+
 
 const WHITE_2000 = [
 	"autoway","ayogom","banguri","bji1203","blockchainstudio","dmsqlc0303",
-	"donekim", "hodolbak", "jsquare","kibumh","morning","stylegold","sweetpapa",
-	"zzing",
-	"codingman","feelsogood","innovit","isaaclab","koyuh8","luckystrikes",
-	"realmankwon","snuff12","yoon",
+	 "jsquare","kibumh","morning","stylegold","sweetpapa",
+	"zzing","codingman","feelsogood","innovit","isaaclab","koyuh8","luckystrikes",
+	"realmankwon",
 ];
 
 const WHITE_1000 = [
