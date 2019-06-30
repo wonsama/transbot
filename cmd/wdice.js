@@ -184,23 +184,18 @@ const ADS_LIST = [
 		link:'http://www.goodspine.org/index.asp',
 		author:'glory7'
 	},	
-	{
-		text:'300 코인 지원 Atomic 지갑',
-		link:'https://steemit.com/sct/@bewarecenterbase/-300-atomic-wallet-airdrop-promo-code-102nr4-1559056135981',
-		author:'bewarecenterbase'
-	},
-	{
-		text:'6월 진행중인 이벤트 모음',
-		link:'https://steemit.com/sct/@skymin/2019-6',
-		author:'skymin'
-	},
+	// {
+	// 	text:'300 코인 지원 Atomic 지갑',
+	// 	link:'https://steemit.com/sct/@bewarecenterbase/-300-atomic-wallet-airdrop-promo-code-102nr4-1559056135981',
+	// 	author:'bewarecenterbase'
+	// },
+	// {
+	// 	text:'6월 진행중인 이벤트 모음',
+	// 	link:'https://steemit.com/sct/@skymin/2019-6',
+	// 	author:'skymin'
+	// },
 	{
 		text:'스팀코인판 핵인싸 나하의 새 글 보러 가실게요~~',
-		link:'https://www.steemcoinpan.com/@naha',
-		author:'naha'
-	},
-	{
-		text:'명품 토큰 BNW 새 소식 보러 가실게요~~',
 		link:'https://www.steemcoinpan.com/@naha',
 		author:'naha'
 	},
@@ -210,13 +205,18 @@ const ADS_LIST = [
 		author:'naha'
 	},
 	{
-		text:'코린이가 1글 1스테이크냠냠 하는 비결',
-		link:'https://steemit.com/sct/@naha/5bzslf-or',
+		text:'팬심 토큰 BNW 새 소식 보러 가실게요~~',
+		link:'https://www.steemcoinpan.com/@naha',
 		author:'naha'
 	},
 	{
-		text:'스팀코인판에서 1글 1스테이크냠냠 하는 비결, 나하가 알려줄게요~~',
-		link:'https://steemit.com/sct/@naha/5bzslf-or',
+		text:'감성 리뷰어 나하의 새 영회리뷰 보러 가실게요~~',
+		link:'https://www.triplea.reviews/@naha',
+		author:'naha'
+	},
+	{
+		text:'오늘 할 보팅을 내일로 미루지 말자. 나하에게 사랑을 담아 보팅하러 가긔~~',
+		link:'https://steemit.com/@naha',
 		author:'naha'
 	}
 ];
