@@ -59,8 +59,8 @@ ayogom x 1
 let ad_idx = 0;
 const ADS_LIST = [
 	{
-		text:'5월 증인보고서',
-		link:'https://steemit.com/sct/@ayogom/2019-5-witness-report-8-and-steem-analysis',
+		text:'2019-6 Witness report #9',
+		link:'https://steemit.com/sct/@ayogom/2019-6-witness-report-9',
 		author:'ayogom'
 	},
 	{
