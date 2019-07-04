@@ -34,31 +34,21 @@ const TIME_VOTING_HOUR = TIME_HOUR * 20;
 const WHITE_10000 = [
 	"lucky2", "knight4sky", "happyberrysboy", "jayplayco", 
 	"fenrir78", "tradingideas", "jinuking", "newbijohn", "y-o-u-t-h-m-e", "goodhello",
-	"hyokhyok", "ioioioioi", "ryanhkr", "wonsama", "ukk", 'wonsama.aaa','wonsama.sct',
+	"hyokhyok", "ioioioioi", "ryanhkr", "wonsama", "ukk", 'wonsama.aaa','wonsama.sct','wonsama.zzan',
 
-	"anpigon", "gfriend96", "jacobyu",
+	"anpigon", "gfriend96", "jacobyu","jayplay.cur",'glory7','oldstone','virus707',"donekim","realmankwon",
+	"honeybeerbear",
 ];
 
 // 랭커 
 const WHITE_5000 = [
-	"naha","jayplay.cur",'glory7',
-	'sonki999','oldstone','virus707','zzings',
-
+	"naha",'sonki999','zzings',
 	'kiwifi','pepsi81','yoon','aaronhong','ramengirl','snuff12',
 	"hodolbak", "hodolbak.aaa", 'viance','hanwoo.aaa','realprince',
-	"donekim",
-];
-
-
-const WHITE_2000 = [
-	"autoway","ayogom","banguri","bji1203","blockchainstudio","dmsqlc0303",
-	 "jsquare","kibumh","morning","stylegold","sweetpapa",
-	"zzing","codingman","feelsogood","innovit","isaaclab","koyuh8","luckystrikes",
-	"realmankwon",
-];
-
-const WHITE_1000 = [
 	"clayop","cyberrn","noisysky","twinbraid","tworld",
+	"autoway","ayogom","banguri","bji1203","blockchainstudio","dmsqlc0303",
+	"jsquare","kibumh","morning","stylegold","sweetpapa",
+	"zzing","codingman","feelsogood","innovit","isaaclab","koyuh8","luckystrikes",
 ];
 
 const _VOTE_ON = process.env.VOTE_ON;
