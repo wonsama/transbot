@@ -51,6 +51,9 @@ const WHITE_5000 = [
 	"zzing","codingman","feelsogood","innovit","isaaclab","koyuh8","luckystrikes",
 ];
 
+const WHITE_2000 = [];
+const WHITE_1000 = [];
+
 const _VOTE_ON = process.env.VOTE_ON;
 const VOTE_ON = _VOTE_ON?(_VOTE_ON.toLowerCase()=="true"?true:false):false;
 
