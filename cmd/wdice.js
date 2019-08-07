@@ -353,7 +353,7 @@ fn.command = async (item) =>{
 
 		let title = '';
 		let jsonMetadata = {
-			tags:['wonsama','wdice'],
+			tags:['wdice','bloque64', 'splintertalk', 'lassecash', 'mediaofficials', 'palnet', 'liv', 'jahm', 'attdummy', 'neoxian', 'zzan', 'iv', 'steemace', 'marlians', 'int', 'sportstalk', 'creativecoin', 'battle', 'aaa', 'naturalproducts', 'spanish', 'realityhubs', 'porn', 'ctp', 'sct', 'steemleo', 'sonicgroove', 'upfundme', 'weedcash', 'tripsteem', 'nga', 'dolphin', 'actnearn', 'stem'],
 			app: STEEM_TRANS_APP,
 			format: 'markdown'
 		};
